@@ -54,6 +54,8 @@
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   .mono { font-family: var(--mono); }
   .hl { background: var(--accent); color: var(--accent-ink); padding: 0 .16em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  /* faixa que ocupa a linha inteira do H1: bloco próprio p/ não invadir o verso acima com line-height apertado */
+  .hl-line { display: inline-block; margin-top: .22em; padding: .02em .16em .08em; line-height: 1; }
 
   .kicker {
     font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
@@ -194,7 +196,7 @@
 <header class="hero" id="top">
   <div class="wrap">
     <p class="kicker bracket reveal">DATA SCIENCE &middot; ML &middot; SHIPPED PRODUCTS</p>
-    <h1 class="reveal">Statistical models,<br>data pipelines,<br><span class="hl">products that ship.</span></h1>
+    <h1 class="reveal">Statistical models,<br>data pipelines,<br><span class="hl hl-line">products that ship.</span></h1>
     <p class="lede reveal">I build data products end to end: probabilistic models with honest evaluation, pipelines that run unattended for months, and SaaS running in production.</p>
     <p class="meta reveal">Based in Brazil <b>//</b> Python &middot; LLMs &middot; Firebase &middot; Postgres</p>
     <div class="cta reveal">
