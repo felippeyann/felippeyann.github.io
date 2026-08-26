@@ -138,6 +138,18 @@
   .flag.rev .flag-frame { order: 2; }
   .flag .cta { gap: 10px; }
   .flag .cta .btn { padding: 11px 16px; font-size: 12px; }
+  /* admin call — enlarged, with mini prints */
+  .admin-call { margin-top: 44px; border: 1px solid var(--line-strong); background: var(--surface); box-shadow: var(--shadow-card); padding: 28px 30px 30px; }
+  .admin-call .kicker { display: block; margin-bottom: 12px; }
+  .admin-call h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(20px,2.2vw,27px); color: var(--ink); letter-spacing: -.01em; margin-bottom: 8px; }
+  .admin-call h3 .hl { padding: 0 .12em; }
+  .admin-call .sub { color: var(--ink-3); font-size: 14.5px; max-width: 780px; margin-bottom: 22px; }
+  .admin-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+  .mini { display: block; border: 1px solid var(--line-strong); background: var(--surface-2); overflow: hidden; transition: transform .12s ease, box-shadow .12s ease; }
+  .mini:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-card); text-decoration: none; }
+  .mini img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--line); }
+  .mini span { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); padding: 7px 9px; }
+  @media (max-width: 820px) { .admin-strip { grid-template-columns: repeat(2, 1fr); } .mini:nth-child(5) { display: none; } }
   /* lexi poster mock */
   .poster.lexi { justify-content: space-between; padding: 20px; gap: 10px; }
   .lx-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
@@ -223,9 +235,9 @@
       <a class="btn" href="mailto:felippe.yann@gmail.com">Email &rarr;</a>
     </div>
     <div class="chips reveal">
-      <span class="chip"><b>Brier 0.531</b> <span class="g">&#9679;</span> forecasting, 100 real matches</span>
-      <span class="chip"><b>8</b> live dashboards</span>
-      <span class="chip"><b>2</b> products in production / beta</span>
+      <span class="chip"><b>Auditor ATS</b> <span class="g">&#9679;</span> AI SaaS in production</span>
+      <span class="chip"><b>10-view</b> admin console</span>
+      <span class="chip"><b>Brier 0.531</b> forecasting model</span>
     </div>
   </div>
 </header>
@@ -233,33 +245,14 @@
 <main>
   <section id="flagship">
     <div class="wrap">
-      <div class="flag">
-        <div class="flag-frame reveal">
-          <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;&gt;_ monte carlo convergence</div>
-          <a href="https://github.com/felippeyann/worldcup-2026-forecasting"><img src="assets/mc_convergence.gif" alt="Monte Carlo convergence — World Cup forecasting"></a>
-        </div>
-        <div class="reveal">
-          <p class="kicker bracket">Flagship <b>//</b> statistical modeling</p>
-          <h2>World Cup 2026 Forecasting</h2>
-          <p class="tag">A probabilistic model, <span class="hl">run live during the tournament.</span></p>
-          <p>Dixon-Coles + Elo, Monte Carlo over the official bracket, mid-tournament recalibration, and honest evaluation: <b style="color:var(--ink-2)">Brier 0.531 over 100 real matches</b> (uniform baseline 0.667). The pre-tournament simulation had the eventual champion as 2nd favourite.</p>
-          <div class="taglist">
-            <span class="tagm">Python</span><span class="tagm">Dixon-Coles</span><span class="tagm">Monte Carlo</span><span class="tagm">Calibration</span><span class="tagm">Brier / log-loss</span>
-          </div>
-          <div class="cta">
-            <a class="btn primary" href="https://github.com/felippeyann/worldcup-2026-forecasting">Repository &rarr;</a>
-            <a class="btn" href="https://github.com/felippeyann/worldcup-2026-forecasting/blob/main/STUDY.md">The study &rarr;</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="flag rev">
+      <p class="kicker bracket reveal"><b>01</b> / flagship</p>
+      <div class="flag" style="margin-top:26px;">
         <div class="flag-frame reveal">
           <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;&gt;_ cvaudit.com.br</div>
           <a href="https://cvaudit.com.br"><img src="assets/auditor-product.png" alt="Auditor ATS product"></a>
         </div>
         <div class="reveal">
-          <p class="kicker bracket">Flagship <b>//</b> in production</p>
+          <p class="kicker bracket">AI SaaS <b>//</b> in production</p>
           <h2>Auditor ATS</h2>
           <p class="tag">An AI resume-analysis SaaS, <span class="hl">built and run solo.</span></p>
           <p><a href="https://cvaudit.com.br">cvaudit.com.br</a>. Serverless Firebase, an LLM report pipeline with structured output, Stripe + Mercado Pago on a durable fulfillment queue, and privacy by design (LGPD). From architecture to payments to SEO: one person, in production.</p>
@@ -268,10 +261,23 @@
           </div>
           <div class="cta">
             <a class="btn primary" href="https://cvaudit.com.br">Visit product &rarr;</a>
-            <a class="btn" href="auditor-admin.html">See the admin &rarr;</a>
             <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md">Case study &rarr;</a>
           </div>
         </div>
+      </div>
+
+      <div class="admin-call reveal">
+        <p class="kicker bracket">the admin console <b>//</b> built to run it</p>
+        <h3>A 10-view internal console I built to <span class="hl">run the whole business.</span></h3>
+        <p class="sub">Business and product KPIs, acquisition and attribution, revenue and P&amp;L, anonymized market intelligence (LGPD), lifecycle and email, ops and a real-time feed. This walkthrough uses synthetic data but mirrors the exact structure running in production.</p>
+        <div class="admin-strip">
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/overview.webp" alt="Overview panel" loading="lazy"><span>Overview</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/revenue.webp" alt="Revenue panel" loading="lazy"><span>Revenue</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/market.webp" alt="Market intelligence panel" loading="lazy"><span>Market intel</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/acquisition.webp" alt="Acquisition panel" loading="lazy"><span>Acquisition</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/live.webp" alt="Live feed panel" loading="lazy"><span>Live feed</span></a>
+        </div>
+        <a class="btn primary" href="auditor-admin.html">Explore all 10 views &rarr;</a>
       </div>
     </div>
   </section>
@@ -281,6 +287,14 @@
       <p class="kicker bracket reveal"><b>02</b> / featured</p>
       <h2 class="reveal">More projects</h2>
       <div class="cards">
+        <article class="card reveal">
+          <div class="thumb"><img src="assets/mc_convergence.gif" alt="Monte Carlo convergence"></div>
+          <div class="body">
+            <h3>World Cup 2026 Forecasting</h3>
+            <p>Dixon-Coles + Elo probabilistic model, run live during the tournament. Monte Carlo over the official bracket, mid-tournament recalibration, honest evaluation: Brier 0.531 over 100 real matches (uniform baseline 0.667).</p>
+            <div class="links"><a href="https://github.com/felippeyann/worldcup-2026-forecasting">repo &rarr;</a><a href="https://github.com/felippeyann/worldcup-2026-forecasting/blob/main/STUDY.md">study &rarr;</a></div>
+          </div>
+        </article>
         <article class="card reveal">
           <div class="thumb"><img src="assets/dashboards.webp" alt="Analytics dashboards"></div>
           <div class="body">
