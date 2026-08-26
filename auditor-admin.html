@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditor ATS · Admin Console | Felippe Yann</title>
+<meta name="description" content="The internal analytics & operations console I built for Auditor ATS: 10 sections, real production structure, synthetic data.">
+<meta property="og:title" content="Auditor ATS · Admin Console">
+<meta property="og:description" content="The internal analytics & operations console behind Auditor ATS. Real structure, synthetic data.">
+<meta property="og:image" content="https://felippeyann.github.io/assets/admin/overview.webp">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='12' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%232563EB'%3E&gt;_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dot: #3f3f46;
+    --bg: #0a0a0b; --surface: #131316; --surface-2: #1a1a1e; --surface-3: #232328;
+    --ink: #f8f7f3; --ink-2: #d4d4d8; --ink-3: #a1a1aa; --ink-4: #8a8a94;
+    --accent: #2563eb; --accent-soft: #60a5fa; --accent-ink: #fff;
+    --green: #4ade80; --amber: #fbbf24;
+    --line: rgba(248,247,243,.09); --line-strong: rgba(248,247,243,.18);
+    --shadow-hero: 8px 8px 0 0 #000; --shadow-card: 5px 5px 0 0 rgba(0,0,0,.6);
+    --shadow-card-hover: 10px 10px 0 0 rgba(0,0,0,.6); --shadow-cta: 4px 4px 0 0 #1d4ed8;
+    --sans: "Space Grotesk", system-ui, sans-serif; --mono: "Space Mono", ui-monospace, monospace;
+  }
+  :root[data-theme="light"] {
+    --dot: rgba(10,10,11,.12);
+    --bg: #f4f3ee; --surface: #fff; --surface-2: #faf9f4; --surface-3: #edece5;
+    --ink: #0a0a0b; --ink-2: #232328; --ink-3: #52525b; --ink-4: #71717a; --accent-soft: #1d4ed8;
+    --line: rgba(10,10,11,.14); --line-strong: rgba(10,10,11,.26);
+    --shadow-hero: 8px 8px 0 0 rgba(10,10,11,.16); --shadow-card: 5px 5px 0 0 rgba(10,10,11,.13);
+    --shadow-card-hover: 10px 10px 0 0 rgba(10,10,11,.16);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink-2); font-family: var(--sans); line-height: 1.6; overflow-x: hidden;
+    background-image: radial-gradient(var(--dot) 1px, transparent 0); background-size: 20px 20px; transition: background-color .25s, color .25s; }
+  a { color: var(--accent-soft); text-decoration: none; }
+  ::selection { background: var(--accent); color: #fff; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .hl { background: var(--accent); color: var(--accent-ink); }
+
+  nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+  nav.scrolled { border-bottom-color: var(--line-strong); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .logo { font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--ink); letter-spacing: -.5px; }
+  .logo .p { color: var(--accent); } .logo .dim { color: var(--ink-4); }
+  .nav-r { display: flex; align-items: center; gap: 22px; }
+  .nav-r a { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .nav-r a:hover { color: var(--ink); }
+  .toggle { width: 36px; height: 36px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); font-size: 15px; }
+  @media (max-width: 640px) { .nav-r .nl { display: none; } }
+
+  .hero { padding: 74px 0 40px; }
+  .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-4); }
+  .kicker::before { content: "[ "; } .kicker::after { content: " ]"; } .kicker b { color: var(--accent); font-weight: 700; }
+  h1 { font-family: var(--sans); font-weight: 900; text-transform: uppercase; font-size: clamp(36px, 6vw, 68px); line-height: 1; letter-spacing: -.03em; color: var(--ink); margin: 18px 0 24px; }
+  h1 .hl { display: inline-block; margin-top: .14em; padding: .02em .16em .08em; line-height: 1; }
+  .lede { max-width: 640px; color: var(--ink-2); font-size: clamp(15px,1.7vw,18px); border-left: 3px solid var(--accent); padding-left: 18px; margin-bottom: 22px; }
+  .meta { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; color: var(--ink-4); text-transform: uppercase; margin-bottom: 22px; }
+  .meta b { color: var(--accent-soft); font-weight: 400; }
+  .note { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); background: var(--surface); border: 1px solid var(--line-strong); border-left: 3px solid var(--amber); padding: 12px 16px; max-width: 720px; }
+  .note b { color: var(--ink); }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0 0; }
+  .btn { font-family: var(--mono); font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 12px 20px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); transition: transform .1s, box-shadow .1s; }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-card-hover); text-decoration: none; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: var(--shadow-cta); }
+
+  section { padding: 20px 0 80px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  .frame { border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); background: var(--surface); display: block; transition: transform .12s, box-shadow .12s; }
+  .frame:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-card-hover); }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--ink-4); }
+  .bar .d { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-3); display: inline-block; }
+  .frame img { width: 100%; display: block; }
+  figcaption { padding: 14px 4px 0; }
+  figcaption .k { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-soft); }
+  figcaption .k b { color: var(--ink-4); }
+  figcaption p { color: var(--ink-3); font-size: 14px; margin-top: 6px; }
+  figcaption.dim .k { color: var(--amber); }
+
+  footer { border-top: 1px solid var(--line-strong); padding: 40px 0 64px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; color: var(--ink-4); }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s, transform .6s; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .frame, .btn { transition: none; } }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="/"><span class="p">&gt;_</span> FELIPPE_YANN <span class="dim">/ auditor-admin</span></a>
+    <div class="nav-r">
+      <a class="nl" href="/">&larr; PORTFOLIO</a>
+      <a class="nl" href="https://cvaudit.com.br">PRODUCT</a>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" title="Light/dark">&#9790;</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker reveal">Flagship <b>//</b> internal tool</p>
+    <h1 class="reveal">The admin behind<br><span class="hl">Auditor ATS.</span></h1>
+    <p class="lede reveal">A full internal analytics &amp; operations console I built for the product, from scratch. Ten sections (business, intelligence, product &amp; ops) over the same data that runs the SaaS: acquisition, revenue, CRM/LTV, lifecycle, market intelligence, pipeline and live ops.</p>
+    <p class="meta reveal">10 sections &middot; 100+ charts &middot; <b>ECharts</b> &middot; command palette &middot; collapsible shell</p>
+    <p class="note reveal"><b>About these screenshots:</b> captured from the product's own built-in <b>mock mode</b> (real structure, 100% synthetic data, no login). It's the actual production admin, not a mockup. An <b>interactive walkthrough is in the works</b>: a self-contained mock build is planned so this can be explored live.</p>
+    <div class="cta reveal">
+      <a class="btn primary" href="https://cvaudit.com.br">Visit the product &rarr;</a>
+      <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md">Case study &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <div class="grid">
+
+      <figure class="reveal"><a class="frame" href="assets/admin/overview.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; visão geral</div><img src="assets/admin/overview.webp" alt="Admin — Visão Geral" loading="lazy"></a><figcaption><span class="k"><b>01 /</b> visão geral</span><p>Business + product KPIs, a health rail, and a combined time series (audits, leads, signups, revenue) with day/week and absolute/indexed toggles.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/revenue.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; receita</div><img src="assets/admin/revenue.webp" alt="Admin — Receita" loading="lazy"></a><figcaption><span class="k"><b>02 /</b> receita</span><p>Revenue &amp; payments: gross/net, coupons, revenue per tier over time, Stripe/Mercado Pago reconciliation, AI cost per run, and a monthly P&amp;L.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/acquisition.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; aquisição</div><img src="assets/admin/acquisition.webp" alt="Admin — Aquisição" loading="lazy"></a><figcaption><span class="k"><b>03 /</b> aquisição</span><p>Traffic &amp; attribution: daily sessions, top UTM sources, conversion funnel, channel×tier matrix, AI-crawler visits, and CAC by channel.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/customers.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; clientes</div><img src="assets/admin/customers.webp" alt="Admin — Clientes" loading="lazy"></a><figcaption><span class="k"><b>04 /</b> clientes</span><p>CRM &amp; LTV: nurture funnel, top contacts by LTV, first-touch attribution, weekly cohorts, and a per-contact activity table.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/lifecycle.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; lifecycle</div><img src="assets/admin/lifecycle.webp" alt="Admin — Lifecycle" loading="lazy"></a><figcaption><span class="k"><b>05 /</b> lifecycle</span><p>Bowtie funnel (lead → account → activated → paying → recurring) and email observability: cadences, deliverability, list health.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/live.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; ao vivo</div><img src="assets/admin/live.webp" alt="Admin — Ao Vivo" loading="lazy"></a><figcaption><span class="k"><b>06 /</b> ao vivo</span><p>Real-time feeds: recent audits, confirmed payments, ops queue &amp; incidents, signups, and a 60-second event stream.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/product.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; produto</div><img src="assets/admin/product.webp" alt="Admin — Produto" loading="lazy"></a><figcaption><span class="k"><b>07 /</b> produto</span><p>Pipeline &amp; cross-analysis: revenue by tier, processing time, score by role, score×time scatter, and score-by-tier boxplots.</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/survey.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; pesquisas</div><img src="assets/admin/survey.webp" alt="Admin — Pesquisas" loading="lazy"></a><figcaption><span class="k"><b>08 /</b> pesquisas</span><p>Email surveys: how customers arrived (origin) and what happened next (outcome: did they get the job? did we help?).</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/ops.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; operações</div><img src="assets/admin/ops.webp" alt="Admin — Operações" loading="lazy"></a><figcaption><span class="k"><b>09 /</b> operações</span><p>Payments/fulfillment health, error types, audit status, a grant-credits tool, and an operations action center (dry-run first).</p></figcaption></figure>
+
+      <figure class="reveal"><a class="frame" href="assets/admin/market.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; mercado</div><img src="assets/admin/market.webp" alt="Admin — Mercado" loading="lazy"></a><figcaption class="dim"><span class="k"><b>10 /</b> mercado</span><p>Anonymous (LGPD) market intelligence over analyzed resumes: professional areas, skill gaps, seniority, geography, demand. Charts are blank in mock, this view is fed by the real anonymized base.</p></figcaption></figure>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&gt;_ felippe yann &middot; brazil</span>
+    <span><a href="/">felippeyann.github.io</a> &middot; <a href="https://cvaudit.com.br">cvaudit.com.br</a></span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const root = document.documentElement, saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    else if (matchMedia('(prefers-color-scheme: light)').matches) root.setAttribute('data-theme', 'light');
+    const btn = document.getElementById('themeToggle');
+    const paint = () => { const t = root.getAttribute('data-theme'); btn.innerHTML = t === 'light' ? '&#9728;' : '&#9790;'; document.querySelector('meta[name=theme-color]').setAttribute('content', t === 'light' ? '#f4f3ee' : '#0a0a0b'); };
+    paint();
+    btn.addEventListener('click', () => { const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; root.setAttribute('data-theme', t); localStorage.setItem('theme', t); paint(); });
+  })();
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+  const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
