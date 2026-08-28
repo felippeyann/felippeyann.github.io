@@ -51,6 +51,11 @@
   .nav-r a { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
   .nav-r a:hover { color: var(--ink); }
   .toggle { width: 36px; height: 36px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); font-size: 15px; }
+  .lang-sw { display: flex; align-items: center; height: 36px; padding: 0 8px; background: var(--surface); border: 1px solid var(--line-strong); font-family: var(--mono); }
+  .lang-sw button { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink-4); padding: 0 5px; }
+  .lang-sw button:hover { color: var(--ink); }
+  .lang-sw button.on { color: var(--accent-soft); font-weight: 700; }
+  .lang-sw .sep { color: var(--ink-4); font-size: 11px; opacity: .5; }
   @media (max-width: 640px) { .nav-r .nl { display: none; } }
 
   .hero { padding: 74px 0 40px; }
@@ -97,23 +102,26 @@
   <div class="wrap nav-in">
     <a class="logo" href="/"><span class="p">&gt;_</span> FELIPPE_YANN <span class="dim">/ auditor-admin</span></a>
     <div class="nav-r">
-      <a class="nl" href="/">&larr; PORTFOLIO</a>
-      <a class="nl" href="https://cvaudit.com.br">PRODUCT</a>
-      <button class="toggle" id="themeToggle" aria-label="Toggle theme" title="Light/dark">&#9790;</button>
+      <a class="nl" href="/" data-i18n="nav1">&larr; PORTFOLIO</a>
+      <a class="nl" href="https://cvaudit.com.br" data-i18n="nav2">PRODUCT</a>
+      <div class="lang-sw" role="group" aria-label="Language" data-pt-aria="Idioma">
+        <button type="button" data-lang-btn="en" aria-pressed="true">EN</button><span class="sep">/</span><button type="button" data-lang-btn="pt" aria-pressed="false">PT</button>
+      </div>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" data-pt-aria="Alternar tema" title="Light/dark" data-pt-title="Claro/escuro">&#9790;</button>
     </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker reveal">Flagship <b>//</b> internal tool</p>
-    <h1 class="reveal">The admin behind<br><span class="hl">Auditor ATS.</span></h1>
-    <p class="lede reveal">A full internal analytics &amp; operations console I built for the product, from scratch. Ten sections (business, intelligence, product &amp; ops) over the same data that runs the SaaS: acquisition, revenue, CRM/LTV, lifecycle, market intelligence, pipeline and live ops.</p>
-    <p class="meta reveal">10 sections &middot; 100+ charts &middot; <b>ECharts</b> &middot; command palette &middot; collapsible shell</p>
-    <p class="note reveal"><b>About these screenshots:</b> captured from the product's own built-in <b>mock mode</b> (real structure, 100% synthetic data, no login). It's the actual production admin, not a mockup, so what you see is the exact information architecture running behind the SaaS.</p>
+    <p class="kicker reveal" data-i18n="hk">Flagship <b>//</b> internal tool</p>
+    <h1 class="reveal" data-i18n="h1">The admin behind<br><span class="hl">Auditor ATS.</span></h1>
+    <p class="lede reveal" data-i18n="lede">A full internal analytics &amp; operations console I built for the product, from scratch. Ten sections (business, intelligence, product &amp; ops) over the same data that runs the SaaS: acquisition, revenue, CRM/LTV, lifecycle, market intelligence, pipeline and live ops.</p>
+    <p class="meta reveal" data-i18n="meta">10 sections &middot; 100+ charts &middot; <b>ECharts</b> &middot; command palette &middot; collapsible shell</p>
+    <p class="note reveal" data-i18n="note"><b>About these screenshots:</b> captured from the product's own built-in <b>mock mode</b> (real structure, 100% synthetic data, no login). It's the actual production admin, not a mockup, so what you see is the exact information architecture running behind the SaaS.</p>
     <div class="cta reveal">
-      <a class="btn primary" href="https://cvaudit.com.br">Visit the product &rarr;</a>
-      <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md">Case study &rarr;</a>
+      <a class="btn primary" href="https://cvaudit.com.br" data-i18n="b1">Visit the product &rarr;</a>
+      <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md" data-i18n="b2">Case study &rarr;</a>
     </div>
   </div>
 </header>
@@ -122,25 +130,25 @@
   <section>
     <div class="grid">
 
-      <figure class="reveal"><a class="frame" href="assets/admin/overview.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; visão geral</div><img src="assets/admin/overview.webp" alt="Admin: Visão Geral" loading="lazy"></a><figcaption><span class="k"><b>01 /</b> visão geral</span><p>Business + product KPIs, a health rail, and a combined time series (audits, leads, signups, revenue) with day/week and absolute/indexed toggles.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/overview.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g1b">&nbsp;&gt;_ /admin &middot; overview</span></div><img src="assets/admin/overview.webp" alt="Admin: Overview" data-pt-alt="Admin: Visão Geral" loading="lazy"></a><figcaption><span class="k" data-i18n="g1k"><b>01 /</b> overview</span><p data-i18n="g1p">Business + product KPIs, a health rail, and a combined time series (audits, leads, signups, revenue) with day/week and absolute/indexed toggles.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/revenue.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; receita</div><img src="assets/admin/revenue.webp" alt="Admin: Receita" loading="lazy"></a><figcaption><span class="k"><b>02 /</b> receita</span><p>Revenue &amp; payments: gross/net, coupons, revenue per tier over time, Stripe/Mercado Pago reconciliation, AI cost per run, and a monthly P&amp;L.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/revenue.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g2b">&nbsp;&gt;_ /admin &middot; revenue</span></div><img src="assets/admin/revenue.webp" alt="Admin: Revenue" data-pt-alt="Admin: Receita" loading="lazy"></a><figcaption><span class="k" data-i18n="g2k"><b>02 /</b> revenue</span><p data-i18n="g2p">Revenue &amp; payments: gross/net, coupons, revenue per tier over time, Stripe/Mercado Pago reconciliation, AI cost per run, and a monthly P&amp;L.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/acquisition.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; aquisição</div><img src="assets/admin/acquisition.webp" alt="Admin: Aquisição" loading="lazy"></a><figcaption><span class="k"><b>03 /</b> aquisição</span><p>Traffic &amp; attribution: daily sessions, top UTM sources, conversion funnel, channel×tier matrix, AI-crawler visits, and CAC by channel.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/acquisition.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g3b">&nbsp;&gt;_ /admin &middot; acquisition</span></div><img src="assets/admin/acquisition.webp" alt="Admin: Acquisition" data-pt-alt="Admin: Aquisição" loading="lazy"></a><figcaption><span class="k" data-i18n="g3k"><b>03 /</b> acquisition</span><p data-i18n="g3p">Traffic &amp; attribution: daily sessions, top UTM sources, conversion funnel, channel×tier matrix, AI-crawler visits, and CAC by channel.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/customers.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; clientes</div><img src="assets/admin/customers.webp" alt="Admin: Clientes" loading="lazy"></a><figcaption><span class="k"><b>04 /</b> clientes</span><p>CRM &amp; LTV: nurture funnel, top contacts by LTV, first-touch attribution, weekly cohorts, and a per-contact activity table.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/customers.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g4b">&nbsp;&gt;_ /admin &middot; customers</span></div><img src="assets/admin/customers.webp" alt="Admin: Customers" data-pt-alt="Admin: Clientes" loading="lazy"></a><figcaption><span class="k" data-i18n="g4k"><b>04 /</b> customers</span><p data-i18n="g4p">CRM &amp; LTV: nurture funnel, top contacts by LTV, first-touch attribution, weekly cohorts, and a per-contact activity table.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/lifecycle.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; lifecycle</div><img src="assets/admin/lifecycle.webp" alt="Admin: Lifecycle" loading="lazy"></a><figcaption><span class="k"><b>05 /</b> lifecycle</span><p>Bowtie funnel (lead → account → activated → paying → recurring) and email observability: cadences, deliverability, list health.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/lifecycle.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g5b">&nbsp;&gt;_ /admin &middot; lifecycle</span></div><img src="assets/admin/lifecycle.webp" alt="Admin: Lifecycle" data-pt-alt="Admin: Lifecycle" loading="lazy"></a><figcaption><span class="k" data-i18n="g5k"><b>05 /</b> lifecycle</span><p data-i18n="g5p">Bowtie funnel (lead → account → activated → paying → recurring) and email observability: cadences, deliverability, list health.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/live.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; ao vivo</div><img src="assets/admin/live.webp" alt="Admin: Ao Vivo" loading="lazy"></a><figcaption><span class="k"><b>06 /</b> ao vivo</span><p>Real-time feeds: recent audits, confirmed payments, ops queue &amp; incidents, signups, and a 60-second event stream.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/live.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g6b">&nbsp;&gt;_ /admin &middot; live</span></div><img src="assets/admin/live.webp" alt="Admin: Live" data-pt-alt="Admin: Ao Vivo" loading="lazy"></a><figcaption><span class="k" data-i18n="g6k"><b>06 /</b> live</span><p data-i18n="g6p">Real-time feeds: recent audits, confirmed payments, ops queue &amp; incidents, signups, and a 60-second event stream.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/product.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; produto</div><img src="assets/admin/product.webp" alt="Admin: Produto" loading="lazy"></a><figcaption><span class="k"><b>07 /</b> produto</span><p>Pipeline &amp; cross-analysis: revenue by tier, processing time, score by role, score×time scatter, and score-by-tier boxplots.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/product.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g7b">&nbsp;&gt;_ /admin &middot; product</span></div><img src="assets/admin/product.webp" alt="Admin: Product" data-pt-alt="Admin: Produto" loading="lazy"></a><figcaption><span class="k" data-i18n="g7k"><b>07 /</b> product</span><p data-i18n="g7p">Pipeline &amp; cross-analysis: revenue by tier, processing time, score by role, score×time scatter, and score-by-tier boxplots.</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/survey.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; pesquisas</div><img src="assets/admin/survey.webp" alt="Admin: Pesquisas" loading="lazy"></a><figcaption><span class="k"><b>08 /</b> pesquisas</span><p>Email surveys: how customers arrived (origin) and what happened next (outcome: did they get the job? did we help?).</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/survey.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g8b">&nbsp;&gt;_ /admin &middot; surveys</span></div><img src="assets/admin/survey.webp" alt="Admin: Surveys" data-pt-alt="Admin: Pesquisas" loading="lazy"></a><figcaption><span class="k" data-i18n="g8k"><b>08 /</b> surveys</span><p data-i18n="g8p">Email surveys: how customers arrived (origin) and what happened next (outcome: did they get the job? did we help?).</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/ops.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; operações</div><img src="assets/admin/ops.webp" alt="Admin: Operações" loading="lazy"></a><figcaption><span class="k"><b>09 /</b> operações</span><p>Payments/fulfillment health, error types, audit status, a grant-credits tool, and an operations action center (dry-run first).</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/ops.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g9b">&nbsp;&gt;_ /admin &middot; ops</span></div><img src="assets/admin/ops.webp" alt="Admin: Ops" data-pt-alt="Admin: Operações" loading="lazy"></a><figcaption><span class="k" data-i18n="g9k"><b>09 /</b> ops</span><p data-i18n="g9p">Payments/fulfillment health, error types, audit status, a grant-credits tool, and an operations action center (dry-run first).</p></figcaption></figure>
 
-      <figure class="reveal"><a class="frame" href="assets/admin/market.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span>&nbsp;&gt;_ /admin &middot; mercado</div><img src="assets/admin/market.webp" alt="Admin: Mercado" loading="lazy"></a><figcaption class="dim"><span class="k"><b>10 /</b> mercado</span><p>Anonymous (LGPD) market intelligence over analyzed resumes: professional areas, skill gaps, seniority, geography, demand. Charts are blank in mock, this view is fed by the real anonymized base.</p></figcaption></figure>
+      <figure class="reveal"><a class="frame" href="assets/admin/market.webp" target="_blank" rel="noopener"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span data-i18n="g10b">&nbsp;&gt;_ /admin &middot; market</span></div><img src="assets/admin/market.webp" alt="Admin: Market" data-pt-alt="Admin: Mercado" loading="lazy"></a><figcaption class="dim"><span class="k" data-i18n="g10k"><b>10 /</b> market</span><p data-i18n="g10p">Anonymous (LGPD) market intelligence over analyzed resumes: professional areas, skill gaps, seniority, geography, demand. Charts are blank in mock, this view is fed by the real anonymized base.</p></figcaption></figure>
 
     </div>
   </section>
@@ -148,7 +156,7 @@
 
 <footer>
   <div class="wrap">
-    <span>&gt;_ felippe yann &middot; brazil</span>
+    <span data-i18n="f1">&gt;_ felippe yann &middot; brazil</span>
     <span><a href="/">felippeyann.github.io</a> &middot; <a href="https://cvaudit.com.br">cvaudit.com.br</a></span>
   </div>
 </footer>
@@ -167,6 +175,72 @@
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
   const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .06 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // language selector: EN is the default (static HTML); PT swaps in from the dict below
+  (function () {
+    const PT = {
+      nav1: '&larr; PORTF&Oacute;LIO', nav2: 'PRODUTO',
+      hk: 'Destaque <b>//</b> ferramenta interna',
+      h1: 'O admin por tr&aacute;s do<br><span class="hl">Auditor ATS.</span>',
+      lede: 'Um console interno completo de analytics e opera&ccedil;&otilde;es que constru&iacute; pro produto, do zero. Dez se&ccedil;&otilde;es (neg&oacute;cio, intelig&ecirc;ncia, produto e opera&ccedil;&otilde;es) sobre os mesmos dados que rodam o SaaS: aquisi&ccedil;&atilde;o, receita, CRM/LTV, lifecycle, intelig&ecirc;ncia de mercado, pipeline e opera&ccedil;&otilde;es ao vivo.',
+      meta: '10 se&ccedil;&otilde;es &middot; 100+ gr&aacute;ficos &middot; <b>ECharts</b> &middot; paleta de comandos &middot; shell colaps&aacute;vel',
+      note: '<b>Sobre estes screenshots:</b> capturados do <b>modo mock</b> embutido no pr&oacute;prio produto (estrutura real, dados 100% sint&eacute;ticos, sem login). &Eacute; o admin de produ&ccedil;&atilde;o de verdade, n&atilde;o um mockup, ent&atilde;o o que voc&ecirc; v&ecirc; &eacute; a arquitetura de informa&ccedil;&atilde;o exata que roda por tr&aacute;s do SaaS.',
+      b1: 'Ver o produto &rarr;', b2: 'Estudo de caso &rarr;',
+      g1b: '&nbsp;&gt;_ /admin &middot; vis&atilde;o geral', g1k: '<b>01 /</b> vis&atilde;o geral',
+      g1p: 'KPIs de neg&oacute;cio e produto, uma r&eacute;gua de sa&uacute;de e uma s&eacute;rie temporal combinada (auditorias, leads, cadastros, receita) com altern&acirc;ncia dia/semana e absoluto/indexado.',
+      g2b: '&nbsp;&gt;_ /admin &middot; receita', g2k: '<b>02 /</b> receita',
+      g2p: 'Receita e pagamentos: bruto/l&iacute;quido, cupons, receita por plano ao longo do tempo, concilia&ccedil;&atilde;o Stripe/Mercado Pago, custo de IA por execu&ccedil;&atilde;o e um P&amp;L mensal.',
+      g3b: '&nbsp;&gt;_ /admin &middot; aquisi&ccedil;&atilde;o', g3k: '<b>03 /</b> aquisi&ccedil;&atilde;o',
+      g3p: 'Tr&aacute;fego e atribui&ccedil;&atilde;o: sess&otilde;es di&aacute;rias, principais origens UTM, funil de convers&atilde;o, matriz canal&times;plano, visitas de crawlers de IA e CAC por canal.',
+      g4b: '&nbsp;&gt;_ /admin &middot; clientes', g4k: '<b>04 /</b> clientes',
+      g4p: 'CRM e LTV: funil de nutri&ccedil;&atilde;o, top contatos por LTV, atribui&ccedil;&atilde;o first-touch, coortes semanais e uma tabela de atividade por contato.',
+      g5b: '&nbsp;&gt;_ /admin &middot; lifecycle', g5k: '<b>05 /</b> lifecycle',
+      g5p: 'Funil bowtie (lead &rarr; conta &rarr; ativado &rarr; pagante &rarr; recorrente) e observabilidade de e-mail: cad&ecirc;ncias, entregabilidade, sa&uacute;de da lista.',
+      g6b: '&nbsp;&gt;_ /admin &middot; ao vivo', g6k: '<b>06 /</b> ao vivo',
+      g6p: 'Feeds em tempo real: auditorias recentes, pagamentos confirmados, fila de opera&ccedil;&otilde;es e incidentes, cadastros e um stream de eventos de 60 segundos.',
+      g7b: '&nbsp;&gt;_ /admin &middot; produto', g7k: '<b>07 /</b> produto',
+      g7p: 'Pipeline e an&aacute;lises cruzadas: receita por plano, tempo de processamento, score por cargo, dispers&atilde;o score&times;tempo e boxplots de score por plano.',
+      g8b: '&nbsp;&gt;_ /admin &middot; pesquisas', g8k: '<b>08 /</b> pesquisas',
+      g8p: 'Pesquisas por e-mail: como os clientes chegaram (origem) e o que aconteceu depois (resultado: conseguiu a vaga? ajudamos?).',
+      g9b: '&nbsp;&gt;_ /admin &middot; opera&ccedil;&otilde;es', g9k: '<b>09 /</b> opera&ccedil;&otilde;es',
+      g9p: 'Sa&uacute;de de pagamentos/fulfillment, tipos de erro, status das auditorias, ferramenta de concess&atilde;o de cr&eacute;ditos e um centro de a&ccedil;&otilde;es de opera&ccedil;&otilde;es (dry-run primeiro).',
+      g10b: '&nbsp;&gt;_ /admin &middot; mercado', g10k: '<b>10 /</b> mercado',
+      g10p: 'Intelig&ecirc;ncia de mercado an&ocirc;nima (LGPD) sobre os curr&iacute;culos analisados: &aacute;reas profissionais, gaps de skills, senioridade, geografia, demanda. Os gr&aacute;ficos ficam vazios no mock, esta vis&atilde;o &eacute; alimentada pela base real anonimizada.',
+      f1: '&gt;_ felippe yann &middot; brasil'
+    };
+    const META = {
+      en: { title: 'Auditor ATS · Admin Console | Felippe Yann', desc: "The internal analytics & operations console I built for Auditor ATS: 10 sections, real production structure, synthetic data." },
+      pt: { title: 'Auditor ATS · Console Admin | Felippe Yann', desc: 'O console interno de analytics e operações que construí pro Auditor ATS: 10 seções, estrutura real de produção, dados sintéticos.' }
+    };
+    const EN = {}; const ATTRS = ['alt', 'title', 'aria'];
+    document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+    ATTRS.forEach(a => document.querySelectorAll('[data-pt-' + a + ']').forEach(el => {
+      const real = a === 'aria' ? 'aria-label' : a;
+      el.setAttribute('data-en-' + a, el.getAttribute(real) || '');
+    }));
+    function apply(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = (lang === 'pt' ? PT : EN)[el.getAttribute('data-i18n')];
+        if (v != null) el.innerHTML = v;
+      });
+      ATTRS.forEach(a => document.querySelectorAll('[data-pt-' + a + ']').forEach(el => {
+        const real = a === 'aria' ? 'aria-label' : a;
+        el.setAttribute(real, el.getAttribute('data-' + (lang === 'pt' ? 'pt' : 'en') + '-' + a));
+      }));
+      document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+      document.title = META[lang].title;
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', META[lang].desc);
+      document.querySelectorAll('[data-lang-btn]').forEach(b => {
+        const on = b.getAttribute('data-lang-btn') === lang;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let saved = 'en';
+    try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+    apply(saved === 'pt' ? 'pt' : 'en');
+    document.querySelectorAll('[data-lang-btn]').forEach(b => b.addEventListener('click', () => apply(b.getAttribute('data-lang-btn'))));
+  })();
 </script>
 </body>
 </html>

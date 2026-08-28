@@ -85,6 +85,11 @@
     font-size: 16px; line-height: 1; transition: transform .12s ease;
   }
   .toggle:hover { transform: translateY(-2px); }
+  .lang-sw { display: flex; align-items: center; height: 38px; padding: 0 8px; background: var(--surface); border: 1px solid var(--line-strong); font-family: var(--mono); }
+  .lang-sw button { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink-4); padding: 0 5px; }
+  .lang-sw button:hover { color: var(--ink); }
+  .lang-sw button.on { color: var(--accent-soft); font-weight: 700; }
+  .lang-sw .sep { color: var(--ink-4); font-size: 11px; opacity: .5; }
   @media (max-width: 720px) { .nav-links .navlink { display: none; } }
 
   /* ---------- hero ---------- */
@@ -213,31 +218,34 @@
   <div class="wrap nav-in">
     <a href="#top" class="logo"><span class="p">&gt;_</span> FELIPPE_YANN</a>
     <div class="nav-links">
-      <a class="navlink" href="#flagship">FLAGSHIP</a>
-      <a class="navlink" href="#projects">PROJECTS</a>
-      <a class="navlink" href="#case-studies">CASE STUDIES</a>
-      <a class="navlink" href="#stack">STACK</a>
-      <button class="toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">◐</button>
+      <a class="navlink" href="#flagship" data-i18n="nav1">FLAGSHIP</a>
+      <a class="navlink" href="#projects" data-i18n="nav2">PROJECTS</a>
+      <a class="navlink" href="#case-studies" data-i18n="nav3">CASE STUDIES</a>
+      <a class="navlink" href="#stack" data-i18n="nav4">STACK</a>
+      <div class="lang-sw" role="group" aria-label="Language" data-pt-aria="Idioma">
+        <button type="button" data-lang-btn="en" aria-pressed="true">EN</button><span class="sep">/</span><button type="button" data-lang-btn="pt" aria-pressed="false">PT</button>
+      </div>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" data-pt-aria="Alternar tema" title="Toggle light/dark" data-pt-title="Claro/escuro">◐</button>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="kicker bracket reveal">DATA SCIENCE &middot; ML &middot; SHIPPED PRODUCTS</p>
-    <h1 class="reveal">Statistical models,<br>data pipelines,<br><span class="hl hl-line">products that ship.</span></h1>
-    <p class="lede reveal">I build data products end to end: probabilistic models with honest evaluation, pipelines that run unattended for months, and SaaS running in production.</p>
-    <p class="meta reveal">Based in Brazil <b>//</b> Python &middot; LLMs &middot; Firebase &middot; Postgres</p>
+    <p class="kicker bracket reveal" data-i18n="hk">DATA SCIENCE &middot; ML &middot; SHIPPED PRODUCTS</p>
+    <h1 class="reveal" data-i18n="h1">Statistical models,<br>data pipelines,<br><span class="hl hl-line">products that ship.</span></h1>
+    <p class="lede reveal" data-i18n="lede">I build data products end to end: probabilistic models with honest evaluation, pipelines that run unattended for months, and SaaS running in production.</p>
+    <p class="meta reveal" data-i18n="meta">Based in Brazil <b>//</b> Python &middot; LLMs &middot; Firebase &middot; Postgres</p>
     <div class="cta reveal">
       <a class="btn primary" href="https://github.com/felippeyann">GitHub &rarr;</a>
       <a class="btn" href="https://www.linkedin.com/in/felippeyann/">LinkedIn &rarr;</a>
-      <a class="btn" href="https://felippeyann.github.io/sales-analytics-dashboards/">Live dashboards &rarr;</a>
-      <a class="btn" href="mailto:felippe.yann@gmail.com">Email &rarr;</a>
+      <a class="btn" href="https://felippeyann.github.io/sales-analytics-dashboards/" data-i18n="bdash">Live dashboards &rarr;</a>
+      <a class="btn" href="mailto:felippe.yann@gmail.com" data-i18n="bmail">Email &rarr;</a>
     </div>
     <div class="chips reveal">
-      <span class="chip"><b>Auditor ATS</b> <span class="g">&#9679;</span> AI SaaS in production</span>
-      <span class="chip"><b>10-view</b> admin console</span>
-      <span class="chip"><b>Brier 0.531</b> forecasting model</span>
+      <span class="chip" data-i18n="c1"><b>Auditor ATS</b> <span class="g">&#9679;</span> AI SaaS in production</span>
+      <span class="chip" data-i18n="c2"><b>10-view</b> admin console</span>
+      <span class="chip" data-i18n="c3"><b>Brier 0.531</b> forecasting model</span>
     </div>
   </div>
 </header>
@@ -245,75 +253,75 @@
 <main>
   <section id="flagship">
     <div class="wrap">
-      <p class="kicker bracket reveal"><b>01</b> / flagship</p>
+      <p class="kicker bracket reveal" data-i18n="fk01"><b>01</b> / flagship</p>
       <div class="flag" style="margin-top:26px;">
         <div class="flag-frame reveal">
           <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;&gt;_ cvaudit.com.br</div>
-          <a href="https://cvaudit.com.br"><img src="assets/auditor-product.png" alt="Auditor ATS product"></a>
+          <a href="https://cvaudit.com.br"><img src="assets/auditor-product.png" alt="Auditor ATS product" data-pt-alt="Produto Auditor ATS"></a>
         </div>
         <div class="reveal">
-          <p class="kicker bracket">AI SaaS <b>//</b> in production</p>
+          <p class="kicker bracket" data-i18n="fkick">AI SaaS <b>//</b> in production</p>
           <h2>Auditor ATS</h2>
-          <p class="tag">An AI resume-analysis SaaS, <span class="hl">built and run solo.</span></p>
-          <p><a href="https://cvaudit.com.br">cvaudit.com.br</a>. Serverless Firebase, an LLM report pipeline with structured output, Stripe + Mercado Pago on a durable fulfillment queue, and privacy by design (LGPD). From architecture to payments to SEO: one person, in production.</p>
+          <p class="tag" data-i18n="ftag">An AI resume-analysis SaaS, <span class="hl">built and run solo.</span></p>
+          <p data-i18n="fp"><a href="https://cvaudit.com.br">cvaudit.com.br</a>. Serverless Firebase, an LLM report pipeline with structured output, Stripe + Mercado Pago on a durable fulfillment queue, and privacy by design (LGPD). From architecture to payments to SEO: one person, in production.</p>
           <div class="taglist">
             <span class="tagm">Firebase</span><span class="tagm">Cloud Functions</span><span class="tagm">Claude API</span><span class="tagm">Stripe</span><span class="tagm">LGPD</span>
           </div>
           <div class="cta">
-            <a class="btn primary" href="https://cvaudit.com.br">Visit product &rarr;</a>
-            <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md">Case study &rarr;</a>
+            <a class="btn primary" href="https://cvaudit.com.br" data-i18n="fb1">Visit product &rarr;</a>
+            <a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md" data-i18n="fb2">Case study &rarr;</a>
           </div>
         </div>
       </div>
 
       <div class="admin-call reveal">
-        <p class="kicker bracket">the admin console <b>//</b> built to run it</p>
-        <h3>A 10-view internal console I built to <span class="hl">run the whole business.</span></h3>
-        <p class="sub">Business and product KPIs, acquisition and attribution, revenue and P&amp;L, anonymized market intelligence (LGPD), lifecycle and email, ops and a real-time feed. This walkthrough uses synthetic data but mirrors the exact structure running in production.</p>
+        <p class="kicker bracket" data-i18n="ak">the admin console <b>//</b> built to run it</p>
+        <h3 data-i18n="ah">A 10-view internal console I built to <span class="hl">run the whole business.</span></h3>
+        <p class="sub" data-i18n="asub">Business and product KPIs, acquisition and attribution, revenue and P&amp;L, anonymized market intelligence (LGPD), lifecycle and email, ops and a real-time feed. This walkthrough uses synthetic data but mirrors the exact structure running in production.</p>
         <div class="admin-strip">
-          <a href="auditor-admin.html" class="mini"><img src="assets/admin/overview.webp" alt="Overview panel" loading="lazy"><span>Overview</span></a>
-          <a href="auditor-admin.html" class="mini"><img src="assets/admin/revenue.webp" alt="Revenue panel" loading="lazy"><span>Revenue</span></a>
-          <a href="auditor-admin.html" class="mini"><img src="assets/admin/market.webp" alt="Market intelligence panel" loading="lazy"><span>Market intel</span></a>
-          <a href="auditor-admin.html" class="mini"><img src="assets/admin/acquisition.webp" alt="Acquisition panel" loading="lazy"><span>Acquisition</span></a>
-          <a href="auditor-admin.html" class="mini"><img src="assets/admin/live.webp" alt="Live feed panel" loading="lazy"><span>Live feed</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/overview.webp" alt="Overview panel" data-pt-alt="Painel de visão geral" loading="lazy"><span data-i18n="am1">Overview</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/revenue.webp" alt="Revenue panel" data-pt-alt="Painel de receita" loading="lazy"><span data-i18n="am2">Revenue</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/market.webp" alt="Market intelligence panel" data-pt-alt="Painel de inteligência de mercado" loading="lazy"><span data-i18n="am3">Market intel</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/acquisition.webp" alt="Acquisition panel" data-pt-alt="Painel de aquisição" loading="lazy"><span data-i18n="am4">Acquisition</span></a>
+          <a href="auditor-admin.html" class="mini"><img src="assets/admin/live.webp" alt="Live feed panel" data-pt-alt="Painel do feed ao vivo" loading="lazy"><span data-i18n="am5">Live feed</span></a>
         </div>
-        <a class="btn primary" href="auditor-admin.html">Explore all 10 views &rarr;</a>
+        <a class="btn primary" href="auditor-admin.html" data-i18n="abtn">Explore all 10 views &rarr;</a>
       </div>
     </div>
   </section>
 
   <section id="projects">
     <div class="wrap">
-      <p class="kicker bracket reveal"><b>02</b> / featured</p>
-      <h2 class="reveal">More projects</h2>
+      <p class="kicker bracket reveal" data-i18n="pk"><b>02</b> / featured</p>
+      <h2 class="reveal" data-i18n="ph">More projects</h2>
       <div class="cards">
         <article class="card reveal">
-          <div class="thumb"><img src="assets/mc_convergence.gif" alt="Monte Carlo convergence"></div>
+          <div class="thumb"><img src="assets/mc_convergence.gif" alt="Monte Carlo convergence" data-pt-alt="Convergência do Monte Carlo"></div>
           <div class="body">
-            <h3>World Cup 2026 Forecasting</h3>
-            <p>Dixon-Coles + Elo probabilistic model, run live during the tournament. Monte Carlo over the official bracket, mid-tournament recalibration, honest evaluation: Brier 0.531 over 100 real matches (uniform baseline 0.667).</p>
-            <div class="links"><a href="https://github.com/felippeyann/worldcup-2026-forecasting">repo &rarr;</a><a href="https://github.com/felippeyann/worldcup-2026-forecasting/blob/main/STUDY.md">study &rarr;</a></div>
+            <h3 data-i18n="p1h">World Cup 2026 Forecasting</h3>
+            <p data-i18n="p1p">Dixon-Coles + Elo probabilistic model, run live during the tournament. Monte Carlo over the official bracket, mid-tournament recalibration, honest evaluation: Brier 0.531 over 100 real matches (uniform baseline 0.667).</p>
+            <div class="links"><a href="https://github.com/felippeyann/worldcup-2026-forecasting">repo &rarr;</a><a href="https://github.com/felippeyann/worldcup-2026-forecasting/blob/main/STUDY.md" data-i18n="p1l">study &rarr;</a></div>
           </div>
         </article>
         <article class="card reveal">
-          <div class="thumb"><img src="assets/dashboards.webp" alt="Analytics dashboards"></div>
+          <div class="thumb"><img src="assets/dashboards.webp" alt="Analytics dashboards" data-pt-alt="Dashboards de analytics"></div>
           <div class="body">
-            <h3>Sales &amp; Marketing Dashboards</h3>
-            <p>Eight interactive BI dashboards for a B2B SaaS revenue operation: booking funnels, SDR productivity, stage monitoring, lead scoring. Single-file vanilla JS + ECharts, published as live demos with 100% synthetic data.</p>
-            <div class="links"><a href="https://felippeyann.github.io/sales-analytics-dashboards/">live &rarr;</a><a href="https://github.com/felippeyann/sales-analytics-dashboards">repo &rarr;</a></div>
+            <h3 data-i18n="p2h">Sales &amp; Marketing Dashboards</h3>
+            <p data-i18n="p2p">Eight interactive BI dashboards for a B2B SaaS revenue operation: booking funnels, SDR productivity, stage monitoring, lead scoring. Single-file vanilla JS + ECharts, published as live demos with 100% synthetic data.</p>
+            <div class="links"><a href="https://felippeyann.github.io/sales-analytics-dashboards/" data-i18n="p2l">live &rarr;</a><a href="https://github.com/felippeyann/sales-analytics-dashboards">repo &rarr;</a></div>
           </div>
         </article>
         <article class="card reveal">
           <div class="thumb"><div class="poster lexi">
             <div class="lx-top"><span class="lx-tag">// lexis &middot; deep mode</span><span class="lx-live">&#9679; live</span></div>
-            <div class="lx-title">AI news,<br>synthesized.</div>
+            <div class="lx-title" data-i18n="lxt">AI news,<br>synthesized.</div>
             <div class="lx-lines"><span></span><span></span><span></span></div>
-            <div class="lx-cites"><span>[1]</span><span>[2]</span><span>[3]</span><span class="lx-prov">provenance &#10003;</span></div>
+            <div class="lx-cites"><span>[1]</span><span>[2]</span><span>[3]</span><span class="lx-prov" data-i18n="lxp">provenance &#10003;</span></div>
           </div></div>
           <div class="body">
             <h3>Lexi</h3>
-            <p>Personalized AI news curation: LLM synthesis with per-claim provenance, a self-hosted RSS ingestion stack with a real test suite, and pre-launch QA driven by browser automation. Expo + Firebase, technical beta.</p>
-            <div class="links"><a href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md">case study &rarr;</a></div>
+            <p data-i18n="p3p">Personalized AI news curation: LLM synthesis with per-claim provenance, a self-hosted RSS ingestion stack with a real test suite, and pre-launch QA driven by browser automation. Expo + Firebase, technical beta.</p>
+            <div class="links"><a href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md" data-i18n="p3l">case study &rarr;</a></div>
           </div>
         </article>
       </div>
@@ -322,26 +330,26 @@
 
   <section id="case-studies">
     <div class="wrap">
-      <p class="kicker bracket reveal"><b>03</b> / deep dives</p>
-      <h2 class="reveal">Engineering case studies</h2>
+      <p class="kicker bracket reveal" data-i18n="ck"><b>03</b> / deep dives</p>
+      <h2 class="reveal" data-i18n="ch">Engineering case studies</h2>
       <div class="cs-list">
-        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md"><b>Auditor ATS</b><span>A solo-built AI SaaS in production: serverless architecture, incident-driven hardening, privacy by design.</span><span class="go">read &rarr;</span></a>
-        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md"><b>Lexi</b><span>AI news curation from RSS ingestion to adaptive synthesis, with citations and provenance as first-class features.</span><span class="go">read &rarr;</span></a>
-        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/revops-analytics.md"><b>RevOps data platform</b><span>ODS on Postgres, health-checked syncs, and a reproducible LLM evaluation engine for sales calls.</span><span class="go">read &rarr;</span></a>
-        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/crm-saas-bi.md"><b>BI for a CRM SaaS</b><span>TV dashboards, unattended Python pipelines and an AI editorial system for a B2B revenue operation.</span><span class="go">read &rarr;</span></a>
+        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/auditor-ats.md" data-i18n="cs1"><b>Auditor ATS</b><span>A solo-built AI SaaS in production: serverless architecture, incident-driven hardening, privacy by design.</span><span class="go">read &rarr;</span></a>
+        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md" data-i18n="cs2"><b>Lexi</b><span>AI news curation from RSS ingestion to adaptive synthesis, with citations and provenance as first-class features.</span><span class="go">read &rarr;</span></a>
+        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/revops-analytics.md" data-i18n="cs3"><b>RevOps data platform</b><span>ODS on Postgres, health-checked syncs, and a reproducible LLM evaluation engine for sales calls.</span><span class="go">read &rarr;</span></a>
+        <a class="cs reveal" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/crm-saas-bi.md" data-i18n="cs4"><b>BI for a CRM SaaS</b><span>TV dashboards, unattended Python pipelines and an AI editorial system for a B2B revenue operation.</span><span class="go">read &rarr;</span></a>
       </div>
     </div>
   </section>
 
   <section id="stack">
     <div class="wrap">
-      <p class="kicker bracket reveal"><b>04</b> / toolbox</p>
+      <p class="kicker bracket reveal" data-i18n="sk"><b>04</b> / toolbox</p>
       <h2 class="reveal">Stack</h2>
       <div class="stack">
-        <div class="col reveal"><h4>Modeling / DS</h4><p>Python, NumPy, Poisson models, Monte Carlo simulation, maximum-likelihood calibration, Brier / log-loss evaluation, matplotlib</p></div>
-        <div class="col reveal"><h4>Data engineering</h4><p>PostgreSQL, Supabase, BigQuery, Sheets automation, ETL pipelines, scheduled jobs, sync health checks</p></div>
-        <div class="col reveal"><h4>LLM engineering</h4><p>Claude API, Gemini API, structured outputs, evaluation architectures, production prompt systems</p></div>
-        <div class="col reveal"><h4>Product / full-stack</h4><p>Firebase serverless, Node.js, TypeScript, Expo / React Native, vanilla JS, ECharts, Apps Script</p></div>
+        <div class="col reveal"><h4 data-i18n="st1">Modeling / DS</h4><p data-i18n="sp1">Python, NumPy, Poisson models, Monte Carlo simulation, maximum-likelihood calibration, Brier / log-loss evaluation, matplotlib</p></div>
+        <div class="col reveal"><h4 data-i18n="st2">Data engineering</h4><p data-i18n="sp2">PostgreSQL, Supabase, BigQuery, Sheets automation, ETL pipelines, scheduled jobs, sync health checks</p></div>
+        <div class="col reveal"><h4 data-i18n="st3">LLM engineering</h4><p data-i18n="sp3">Claude API, Gemini API, structured outputs, evaluation architectures, production prompt systems</p></div>
+        <div class="col reveal"><h4 data-i18n="st4">Product / full-stack</h4><p data-i18n="sp4">Firebase serverless, Node.js, TypeScript, Expo / React Native, vanilla JS, ECharts, Apps Script</p></div>
       </div>
     </div>
   </section>
@@ -349,7 +357,7 @@
 
 <footer>
   <div class="wrap">
-    <span>&gt;_ felippe yann &middot; brazil</span>
+    <span data-i18n="f1">&gt;_ felippe yann &middot; brazil</span>
     <span><a href="https://github.com/felippeyann">github.com/felippeyann</a> &middot; <a href="https://www.linkedin.com/in/felippeyann/">linkedin</a> &middot; <a href="mailto:felippe.yann@gmail.com">felippe.yann@gmail.com</a></span>
   </div>
 </footer>
@@ -379,6 +387,88 @@
   // reveal
   const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // language selector: EN is the default (static HTML); PT swaps in from the dict below
+  (function () {
+    const PT = {
+      nav1: 'DESTAQUE', nav2: 'PROJETOS', nav3: 'ESTUDOS DE CASO', nav4: 'STACK',
+      hk: 'DATA SCIENCE &middot; ML &middot; PRODUTOS NO AR',
+      h1: 'Modelos estat&iacute;sticos,<br>pipelines de dados,<br><span class="hl hl-line">produtos no ar.</span>',
+      lede: 'Construo produtos de dados de ponta a ponta: modelos probabil&iacute;sticos com avalia&ccedil;&atilde;o honesta, pipelines que rodam sozinhos por meses e SaaS rodando em produ&ccedil;&atilde;o.',
+      meta: 'Brasil <b>//</b> Python &middot; LLMs &middot; Firebase &middot; Postgres',
+      bdash: 'Dashboards ao vivo &rarr;', bmail: 'E-mail &rarr;',
+      c1: '<b>Auditor ATS</b> <span class="g">&#9679;</span> SaaS de IA em produ&ccedil;&atilde;o',
+      c2: 'console admin de <b>10 pain&eacute;is</b>',
+      c3: 'modelo de previs&atilde;o <b>Brier 0,531</b>',
+      fk01: '<b>01</b> / destaque',
+      fkick: 'SaaS de IA <b>//</b> em produ&ccedil;&atilde;o',
+      ftag: 'Um SaaS de an&aacute;lise de curr&iacute;culos com IA, <span class="hl">constru&iacute;do e operado solo.</span>',
+      fp: '<a href="https://cvaudit.com.br">cvaudit.com.br</a>. Firebase serverless, pipeline de relat&oacute;rios LLM com sa&iacute;da estruturada, Stripe + Mercado Pago numa fila dur&aacute;vel de fulfillment e privacidade por design (LGPD). Da arquitetura ao SEO, passando por pagamentos: uma pessoa, em produ&ccedil;&atilde;o.',
+      fb1: 'Ver o produto &rarr;', fb2: 'Estudo de caso &rarr;',
+      ak: 'o console admin <b>//</b> feito pra operar o neg&oacute;cio',
+      ah: 'Um console interno de 10 pain&eacute;is que constru&iacute; pra <span class="hl">tocar o neg&oacute;cio inteiro.</span>',
+      asub: 'KPIs de neg&oacute;cio e produto, aquisi&ccedil;&atilde;o e atribui&ccedil;&atilde;o, receita e P&amp;L, intelig&ecirc;ncia de mercado anonimizada (LGPD), lifecycle e e-mail, opera&ccedil;&otilde;es e um feed em tempo real. Este tour usa dados sint&eacute;ticos, mas espelha a estrutura exata que roda em produ&ccedil;&atilde;o.',
+      am1: 'Vis&atilde;o geral', am2: 'Receita', am3: 'Mercado', am4: 'Aquisi&ccedil;&atilde;o', am5: 'Ao vivo',
+      abtn: 'Explorar os 10 pain&eacute;is &rarr;',
+      pk: '<b>02</b> / destaques', ph: 'Mais projetos',
+      p1h: 'Previs&atilde;o da Copa 2026',
+      p1p: 'Modelo probabil&iacute;stico Dixon-Coles + Elo, rodado ao vivo durante o torneio. Monte Carlo sobre o chaveamento oficial, recalibra&ccedil;&atilde;o no meio do torneio e avalia&ccedil;&atilde;o honesta: Brier 0,531 em 100 jogos reais (baseline uniforme 0,667).',
+      p1l: 'estudo &rarr;',
+      p2h: 'Dashboards de Vendas &amp; Marketing',
+      p2p: 'Oito dashboards interativos de BI pra opera&ccedil;&atilde;o de receita de um SaaS B2B: funis de agendamento, produtividade de SDR, monitoramento de etapas, lead scoring. Arquivo &uacute;nico em JS vanilla + ECharts, publicados como demos ao vivo com dados 100% sint&eacute;ticos.',
+      p2l: 'ao vivo &rarr;',
+      lxt: 'Not&iacute;cias de IA,<br>sintetizadas.', lxp: 'proveni&ecirc;ncia &#10003;',
+      p3p: 'Curadoria personalizada de not&iacute;cias de IA: s&iacute;ntese por LLM com proveni&ecirc;ncia por afirma&ccedil;&atilde;o, stack self-hosted de ingest&atilde;o RSS com su&iacute;te de testes de verdade e QA pr&eacute;-lan&ccedil;amento guiado por automa&ccedil;&atilde;o de browser. Expo + Firebase, beta t&eacute;cnico.',
+      p3l: 'estudo de caso &rarr;',
+      ck: '<b>03</b> / mergulhos', ch: 'Estudos de caso de engenharia',
+      cs1: '<b>Auditor ATS</b><span>Um SaaS de IA constru&iacute;do solo, em produ&ccedil;&atilde;o: arquitetura serverless, hardening guiado por incidentes, privacidade por design.</span><span class="go">ler &rarr;</span>',
+      cs2: '<b>Lexi</b><span>Curadoria de not&iacute;cias de IA da ingest&atilde;o RSS &agrave; s&iacute;ntese adaptativa, com cita&ccedil;&otilde;es e proveni&ecirc;ncia como recursos de primeira classe.</span><span class="go">ler &rarr;</span>',
+      cs3: '<b>Plataforma de dados RevOps</b><span>ODS em Postgres, syncs com health check e um motor reprodut&iacute;vel de avalia&ccedil;&atilde;o LLM pra calls de venda.</span><span class="go">ler &rarr;</span>',
+      cs4: '<b>BI pra um SaaS de CRM</b><span>Dashboards de TV, pipelines Python aut&ocirc;nomos e um sistema editorial com IA pra uma opera&ccedil;&atilde;o de receita B2B.</span><span class="go">ler &rarr;</span>',
+      sk: '<b>04</b> / ferramentas',
+      st1: 'Modelagem / DS',
+      sp1: 'Python, NumPy, modelos de Poisson, simula&ccedil;&atilde;o de Monte Carlo, calibra&ccedil;&atilde;o por m&aacute;xima verossimilhan&ccedil;a, avalia&ccedil;&atilde;o Brier / log-loss, matplotlib',
+      st2: 'Engenharia de dados',
+      sp2: 'PostgreSQL, Supabase, BigQuery, automa&ccedil;&atilde;o de Sheets, pipelines ETL, jobs agendados, health checks de sync',
+      st3: 'Engenharia de LLM',
+      sp3: 'Claude API, Gemini API, sa&iacute;das estruturadas, arquiteturas de avalia&ccedil;&atilde;o, sistemas de prompt em produ&ccedil;&atilde;o',
+      st4: 'Produto / full-stack',
+      sp4: 'Firebase serverless, Node.js, TypeScript, Expo / React Native, JS vanilla, ECharts, Apps Script',
+      f1: '&gt;_ felippe yann &middot; brasil'
+    };
+    const META = {
+      en: { title: 'Felippe Yann | Data Science & Product Engineering', desc: 'Statistical models, data pipelines, analytics dashboards and SaaS products in production. Data science, ML and product engineering.' },
+      pt: { title: 'Felippe Yann | Data Science & Engenharia de Produto', desc: 'Modelos estatísticos, pipelines de dados, dashboards de analytics e produtos SaaS em produção. Data science, ML e engenharia de produto.' }
+    };
+    const EN = {}; const ATTRS = ['alt', 'title', 'aria'];
+    document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+    ATTRS.forEach(a => document.querySelectorAll('[data-pt-' + a + ']').forEach(el => {
+      const real = a === 'aria' ? 'aria-label' : a;
+      el.setAttribute('data-en-' + a, el.getAttribute(real) || '');
+    }));
+    function apply(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = (lang === 'pt' ? PT : EN)[el.getAttribute('data-i18n')];
+        if (v != null) el.innerHTML = v;
+      });
+      ATTRS.forEach(a => document.querySelectorAll('[data-pt-' + a + ']').forEach(el => {
+        const real = a === 'aria' ? 'aria-label' : a;
+        el.setAttribute(real, el.getAttribute('data-' + (lang === 'pt' ? 'pt' : 'en') + '-' + a));
+      }));
+      document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+      document.title = META[lang].title;
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', META[lang].desc);
+      document.querySelectorAll('[data-lang-btn]').forEach(b => {
+        const on = b.getAttribute('data-lang-btn') === lang;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let saved = 'en';
+    try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+    apply(saved === 'pt' ? 'pt' : 'en');
+    document.querySelectorAll('[data-lang-btn]').forEach(b => b.addEventListener('click', () => apply(b.getAttribute('data-lang-btn'))));
+  })();
 </script>
 </body>
 </html>
