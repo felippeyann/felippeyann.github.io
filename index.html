@@ -10,6 +10,22 @@
 <meta property="og:image" content="https://felippeyann.github.io/assets/social-card.png">
 <meta property="og:url" content="https://felippeyann.github.io/">
 <meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Felippe Yann Machado Virgílio",
+  "alternateName": "Felippe Yann",
+  "url": "https://felippeyann.github.io/",
+  "jobTitle": "Data Science & Product Engineering",
+  "knowsAbout": ["Data Science", "Analytics Engineering", "Probabilistic Modeling", "LLM Engineering", "Revenue Operations", "PostgreSQL", "Python"],
+  "sameAs": [
+    "https://github.com/felippeyann",
+    "https://www.linkedin.com/in/felippeyann/",
+    "https://cvaudit.com.br"
+  ]
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='12' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%232563EB'%3E&gt;_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,6 +262,7 @@
       <span class="chip" data-i18n="c1"><b>Auditor ATS</b> <span class="g">&#9679;</span> AI SaaS in production</span>
       <span class="chip" data-i18n="c2"><b>10-view</b> admin console</span>
       <span class="chip" data-i18n="c3"><b>Brier 0.531</b> forecasting model</span>
+      <span class="chip" data-i18n="c4"><b>1,797</b> automated tests in CI</span>
     </div>
   </div>
 </header>
@@ -263,6 +280,7 @@
           <p class="kicker bracket" data-i18n="fkick">AI SaaS <b>//</b> in production</p>
           <h2>Auditor ATS</h2>
           <p class="tag" data-i18n="ftag">An AI resume-analysis SaaS, <span class="hl">built and run solo.</span></p>
+          <p class="meta" style="margin-bottom:18px;" data-i18n="fproof">1,797 automated tests &middot; 78 cloud functions in production &middot; 0.43% pipeline error rate</p>
           <p data-i18n="fp"><a href="https://cvaudit.com.br">cvaudit.com.br</a>. Serverless Firebase, an LLM report pipeline with structured output, Stripe + Mercado Pago on a durable fulfillment queue, and privacy by design (LGPD). From architecture to payments to SEO: one person, in production.</p>
           <div class="taglist">
             <span class="tagm">Firebase</span><span class="tagm">Cloud Functions</span><span class="tagm">Claude API</span><span class="tagm">Stripe</span><span class="tagm">LGPD</span>
@@ -321,7 +339,19 @@
           <div class="body">
             <h3>Lexi</h3>
             <p data-i18n="p3p">Personalized AI news curation: LLM synthesis with per-claim provenance, a self-hosted RSS ingestion stack with a real test suite, and pre-launch QA driven by browser automation. Expo + Firebase, technical beta.</p>
-            <div class="links"><a href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md" data-i18n="p3l">case study &rarr;</a></div>
+            <div class="links"><a href="lexi.html" data-i18n="p3t">the product &rarr;</a><a href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md" data-i18n="p3l">case study &rarr;</a></div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <div class="thumb"><div class="poster">
+            <span class="sm">// mcp server &middot; defi &middot; open source</span>
+            <span class="big">AgentFi</span>
+            <span class="sm" data-i18n="p4s">archived, on purpose</span>
+          </div></div>
+          <div class="body">
+            <h3>AgentFi</h3>
+            <p data-i18n="p4p">DeFi transaction infrastructure for AI agents: an MCP server with 31 tools published to npm, policy-guarded execution, and Solidity contracts verified on Base mainnet. Built solo in 53 days, archived with an honest public postmortem. The thesis is documented, dated, and waiting for its moment.</p>
+            <div class="links"><a href="agentfi.html" data-i18n="p4l">the thesis &rarr;</a><a href="https://github.com/felippeyann/agentfi">repo &rarr;</a></div>
           </div>
         </article>
       </div>
@@ -366,7 +396,8 @@
   // theme toggle
   (function () {
     const root = document.documentElement;
-    const saved = localStorage.getItem('theme');
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
     if (saved) root.setAttribute('data-theme', saved);
     else if (window.matchMedia('(prefers-color-scheme: light)').matches) root.setAttribute('data-theme', 'light');
     const btn = document.getElementById('themeToggle');
@@ -378,7 +409,9 @@
     paint();
     btn.addEventListener('click', () => {
       const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', t); localStorage.setItem('theme', t); paint();
+      root.setAttribute('data-theme', t);
+      try { localStorage.setItem('theme', t); } catch (e) {}
+      paint();
     });
   })();
   // nav border on scroll
@@ -399,9 +432,11 @@
       c1: '<b>Auditor ATS</b> <span class="g">&#9679;</span> SaaS de IA em produ&ccedil;&atilde;o',
       c2: 'console admin de <b>10 pain&eacute;is</b>',
       c3: 'modelo de previs&atilde;o <b>Brier 0,531</b>',
+      c4: '<b>1.797</b> testes automatizados em CI',
       fk01: '<b>01</b> / destaque',
       fkick: 'SaaS de IA <b>//</b> em produ&ccedil;&atilde;o',
       ftag: 'Um SaaS de an&aacute;lise de curr&iacute;culos com IA, <span class="hl">constru&iacute;do e operado solo.</span>',
+      fproof: '1.797 testes automatizados &middot; 78 cloud functions em produ&ccedil;&atilde;o &middot; 0,43% de taxa de erro no pipeline',
       fp: '<a href="https://cvaudit.com.br">cvaudit.com.br</a>. Firebase serverless, pipeline de relat&oacute;rios LLM com sa&iacute;da estruturada, Stripe + Mercado Pago numa fila dur&aacute;vel de fulfillment e privacidade por design (LGPD). Da arquitetura ao SEO, passando por pagamentos: uma pessoa, em produ&ccedil;&atilde;o.',
       fb1: 'Ver o produto &rarr;', fb2: 'Estudo de caso &rarr;',
       ak: 'o console admin <b>//</b> feito pra operar o neg&oacute;cio',
@@ -418,7 +453,10 @@
       p2l: 'ao vivo &rarr;',
       lxt: 'Not&iacute;cias de IA,<br>sintetizadas.', lxp: 'proveni&ecirc;ncia &#10003;',
       p3p: 'Curadoria personalizada de not&iacute;cias de IA: s&iacute;ntese por LLM com proveni&ecirc;ncia por afirma&ccedil;&atilde;o, stack self-hosted de ingest&atilde;o RSS com su&iacute;te de testes de verdade e QA pr&eacute;-lan&ccedil;amento guiado por automa&ccedil;&atilde;o de browser. Expo + Firebase, beta t&eacute;cnico.',
-      p3l: 'estudo de caso &rarr;',
+      p3l: 'estudo de caso &rarr;', p3t: 'o produto &rarr;',
+      p4s: 'arquivado, de prop&oacute;sito',
+      p4p: 'Infraestrutura de transa&ccedil;&otilde;es DeFi para agentes de IA: servidor MCP com 31 ferramentas publicado no npm, execu&ccedil;&atilde;o protegida por pol&iacute;ticas e contratos Solidity verificados na Base mainnet. Constru&iacute;do solo em 53 dias, arquivado com um postmortem p&uacute;blico honesto. A tese est&aacute; documentada, datada e esperando o momento dela.',
+      p4l: 'a tese &rarr;',
       ck: '<b>03</b> / mergulhos', ch: 'Estudos de caso de engenharia',
       cs1: '<b>Auditor ATS</b><span>Um SaaS de IA constru&iacute;do solo, em produ&ccedil;&atilde;o: arquitetura serverless, hardening guiado por incidentes, privacidade por design.</span><span class="go">ler &rarr;</span>',
       cs2: '<b>Lexi</b><span>Curadoria de not&iacute;cias de IA da ingest&atilde;o RSS &agrave; s&iacute;ntese adaptativa, com cita&ccedil;&otilde;es e proveni&ecirc;ncia como recursos de primeira classe.</span><span class="go">ler &rarr;</span>',

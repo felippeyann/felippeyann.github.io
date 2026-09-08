@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lexi | Felippe Yann</title>
+<meta name="description" content="Lexi: personalized AI news curation with per-claim provenance. Technical beta, on hold. The thesis, the screens, the pricing architecture and the honest reason it is paused.">
+<meta property="og:title" content="Lexi | Felippe Yann">
+<meta property="og:description" content="Curation as power: an AI news product in technical beta, documented end to end.">
+<meta property="og:url" content="https://felippeyann.github.io/lexi.html">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='12' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%23E8B14E'%3E&gt;_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dot: #3f3f46;
+    --bg: #0a0a0b; --surface: #131316; --surface-2: #1a1a1e; --surface-3: #232328;
+    --ink: #f8f7f3; --ink-2: #d4d4d8; --ink-3: #a1a1aa; --ink-4: #8a8a94;
+    --accent: #2563eb; --accent-soft: #60a5fa; --accent-ink: #ffffff;
+    --gold: #E8B14E;
+    --green: #4ade80;
+    --line: rgba(248,247,243,.09); --line-strong: rgba(248,247,243,.18);
+    --shadow-card: 5px 5px 0 0 rgba(0,0,0,.6);
+    --shadow-card-hover: 8px 8px 0 0 rgba(0,0,0,.6);
+    --sans: "Space Grotesk", system-ui, sans-serif;
+    --mono: "Space Mono", ui-monospace, monospace;
+  }
+  :root[data-theme="light"] {
+    --dot: rgba(10,10,11,.12);
+    --bg: #f4f3ee; --surface: #ffffff; --surface-2: #faf9f4; --surface-3: #edece5;
+    --ink: #0a0a0b; --ink-2: #232328; --ink-3: #52525b; --ink-4: #71717a;
+    --accent: #2563eb; --accent-soft: #1d4ed8; --accent-ink: #ffffff;
+    --gold: #a06e14;
+    --line: rgba(10,10,11,.14); --line-strong: rgba(10,10,11,.26);
+    --shadow-card: 5px 5px 0 0 rgba(10,10,11,.13);
+    --shadow-card-hover: 8px 8px 0 0 rgba(10,10,11,.16);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink-2);
+    font-family: var(--sans); line-height: 1.65; overflow-x: hidden;
+    background-image: radial-gradient(var(--dot) 1px, transparent 0);
+    background-size: 20px 20px;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  a { color: var(--accent-soft); text-decoration: none; }
+  ::selection { background: var(--accent); color: #fff; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: var(--mono); }
+  .hl { background: var(--accent); color: var(--accent-ink); padding: 0 .16em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .hl-gold { background: var(--gold); color: #0a0a0b; padding: 0 .16em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-4); }
+  .kicker b { color: var(--gold); font-weight: 700; }
+  .bracket::before { content: "[ "; color: var(--ink-4); }
+  .bracket::after { content: " ]"; color: var(--ink-4); }
+  nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-strong); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: var(--mono); font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -.5px; }
+  .logo .p { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-links a { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .nav-links a:hover { color: var(--ink); }
+  .toggle { width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); font-size: 16px; }
+  .lang-sw { display: flex; align-items: center; height: 38px; padding: 0 8px; background: var(--surface); border: 1px solid var(--line-strong); font-family: var(--mono); }
+  .lang-sw button { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--ink-4); padding: 0 5px; }
+  .lang-sw button.on { color: var(--accent-soft); font-weight: 700; }
+  .lang-sw .sep { color: var(--ink-4); font-size: 11px; opacity: .5; }
+  .hero { padding: 72px 0 48px; }
+  h1 { font-family: var(--sans); font-weight: 900; text-transform: uppercase; font-size: clamp(44px, 8vw, 92px); line-height: .98; letter-spacing: -.03em; color: var(--ink); margin: 18px 0 22px; }
+  .lede { border-left: 3px solid var(--gold); padding-left: 18px; color: var(--ink-2); font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 20px; }
+  .meta { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--ink-4); text-transform: uppercase; margin-bottom: 26px; }
+  .meta b { color: var(--gold); font-weight: 400; }
+  section { padding: 54px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--sans); font-weight: 700; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -.02em; color: var(--ink); margin: 10px 0 22px; }
+  .prose p { color: var(--ink-2); font-size: 15.5px; max-width: 720px; margin-bottom: 16px; }
+  .prose p b { color: var(--ink); }
+  blockquote { border-left: 3px solid var(--gold); background: var(--surface); padding: 16px 20px; max-width: 720px; margin: 20px 0; color: var(--ink); font-size: 16px; box-shadow: var(--shadow-card); }
+  blockquote .src { display: block; margin-top: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 8px; }
+  .shot { background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); }
+  .shot img { width: 100%; display: block; border-bottom: 1px solid var(--line); }
+  .shot figcaption { padding: 12px 16px; }
+  .shot figcaption b { display: block; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .shot figcaption span { color: var(--ink-3); font-size: 13px; }
+  .shot.wide { grid-column: 1 / -1; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin: 22px 0; }
+  .fact { background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); padding: 16px 18px; }
+  .fact b { display: block; font-family: var(--mono); font-size: 20px; color: var(--ink); }
+  .fact span { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); }
+  table { border-collapse: collapse; width: 100%; max-width: 720px; font-size: 14px; margin: 14px 0; }
+  th, td { border: 1px solid var(--line-strong); padding: 9px 12px; text-align: left; color: var(--ink-2); }
+  th { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--surface); }
+  .btn { display: inline-block; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 13px 22px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-card-hover); }
+  footer { border-top: 1px solid var(--line-strong); padding: 36px 0 56px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; color: var(--ink-4); }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="p">&gt;_</span> FELIPPE_YANN</a>
+    <div class="nav-links">
+      <a href="index.html#projects" data-i18n="nback">&larr; ALL PROJECTS</a>
+      <div class="lang-sw" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="en" aria-pressed="true">EN</button><span class="sep">/</span><button type="button" data-lang-btn="pt" aria-pressed="false">PT</button>
+      </div>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker bracket reveal" data-i18n="hk">AI PRODUCT <b>//</b> TECHNICAL BETA, ON HOLD</p>
+    <h1 class="reveal">LEXI</h1>
+    <p class="lede reveal" data-i18n="lede">Personalized AI news curation with per-claim provenance. Built end to end, running as an installable PWA, paused before launch for one honest reason: unit economics.</p>
+    <p class="meta reveal" data-i18n="meta">19 cloud functions <b>//</b> 192 unit tests <b>//</b> citations as a first-class feature</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k1"><b>01</b> / the thesis</p>
+      <h2 class="reveal" data-i18n="h2a">Curation is the product</h2>
+      <p class="reveal" data-i18n="t1">The bet behind Lexi is simple to state: <b>in a future of machine-generated content at scale, information curation becomes one of the greatest powers there is.</b> When anyone can produce infinite plausible text, the scarce skill is deciding what deserves attention, and proving why.</p>
+      <blockquote class="reveal"><span data-i18n="q1">"The internet of 2026 does not have a supply problem. It has a filter problem. Whoever filters delivers more value than whoever produces."</span><span class="src" data-i18n="q1s">Lexi vision document, 2026 (translated from the Portuguese original)</span></blockquote>
+      <p class="reveal" data-i18n="t2">Two design consequences follow. First, <b>provenance is not a feature, it is the contract</b>: every synthesized claim in a Lexis carries a numbered citation back to its source, and the system tracks hallucination and citation-coverage SLOs. Second, the signal source matters: Lexi was born <b>academic-first</b>, built around arXiv and scientific feeds, where hypotheses and solutions appear before they reach the news cycle, with general RSS added later to complement the experience. The whole point is escaping generic content.</p>
+      <p class="reveal" data-i18n="t3">The next step of the thesis, documented but not yet built, is <b>the user's voice</b>: learning how each person writes and frames arguments, so the content produced after curation reads like them, not like a model.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k2"><b>02</b> / where it came from</p>
+      <h2 class="reveal" data-i18n="h2b">From a Discord group to an engine</h2>
+      <p class="reveal" data-i18n="o1">Lexi did not start as a startup idea. It started as a habit: curating news for a Discord group I shared with work colleagues. The curation kept getting better, and at some point it stopped being a feed and became a motor: the curated data started generating full articles and data visualizations on its own.</p>
+      <p class="reveal" data-i18n="o2">That progression, curation to synthesis to publication, is the product. It also connects to the larger thesis I work under: the next generation of great software companies will look like service companies, with automation, integration and data flows offering services through LLM tooling. Lexi is that pattern applied to information itself.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker bracket reveal" data-i18n="k3"><b>03</b> / the product, in screens</p>
+      <h2 class="reveal" data-i18n="h2c">Built and running</h2>
+      <p class="kicker reveal" style="margin-bottom:18px;" data-i18n="galn">All screens captured from the live app with a synthetic audit account. Dark theme, "Lumen" design system.</p>
+      <div class="grid">
+        <figure class="shot wide reveal"><img src="assets/lexi/feed-desktop.webp" alt="Lexi feed with editorial hero, article cards and insights sidebar" loading="lazy"><figcaption><b data-i18n="g1b">The feed</b><span data-i18n="g1s">Editorial hero, curated cards with AI covers, word map and source health at a glance.</span></figcaption></figure>
+        <figure class="shot wide reveal"><img src="assets/lexi/lexis-citations-desktop.webp" alt="A generated Lexis article with numbered inline citations" loading="lazy"><figcaption><b data-i18n="g2b">A Lexis, with receipts</b><span data-i18n="g2s">1,312 words synthesized from curated sources, every claim carrying numbered inline citations.</span></figcaption></figure>
+        <figure class="shot wide reveal"><img src="assets/lexi/keywords-desktop.webp" alt="Keyword profile with weighted chips grouped by category" loading="lazy"><figcaption><b data-i18n="g3b">The taste graph</b><span data-i18n="g3s">Persona templates and 100+ weighted keywords. The scoring is visible because the thesis says scores without explanation are coercion.</span></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/lexi/insights-mobile.webp" alt="Curation observatory dashboard with KPIs" loading="lazy"><figcaption><b data-i18n="g4b">Curation observatory</b><span data-i18n="g4s">KPIs with deltas and automatic signals about your own reading diet.</span></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/lexi/themes-mobile.webp" alt="Emergent themes with acceleration metrics" loading="lazy"><figcaption><b data-i18n="g5b">Emergent themes</b><span data-i18n="g5s">AI-discovered clusters with acceleration (up to 17x), each one a Lexis waiting to be generated.</span></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/lexi/article-mobile.webp" alt="Article view with score and matched keywords" loading="lazy"><figcaption><b data-i18n="g6b">Explainable scoring</b><span data-i18n="g6s">Every article shows its score, the keywords that matched, and a "why this score?" button.</span></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/lexi/sources-mobile.webp" alt="RSS source management with health status" loading="lazy"><figcaption><b data-i18n="g7b">Source health</b><span data-i18n="g7s">Feeds with status, auto-pause, rediscovery and per-source anti-monopoly caps.</span></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/lexi/credits-mobile.webp" alt="Credits purchase screen with Stripe and Pix" loading="lazy"><figcaption><b data-i18n="g8b">Monetization, wired</b><span data-i18n="g8s">Stripe for cards, Mercado Pago for Pix, credit packs with decreasing unit price.</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k4"><b>04</b> / under the hood</p>
+      <h2 class="reveal" data-i18n="h2d">Engineering, not a wrapper</h2>
+      <div class="facts">
+        <div class="fact reveal"><b>19</b><span data-i18n="f1">cloud functions in production</span></div>
+        <div class="fact reveal"><b>192</b><span data-i18n="f2">unit tests on the pure engine</span></div>
+        <div class="fact reveal"><b>40+</b><span data-i18n="f3">real issues found by browser-automation QA</span></div>
+        <div class="fact reveal"><b>&gt;75%</b><span data-i18n="f4">citation coverage SLO</span></div>
+      </div>
+      <p class="reveal" data-i18n="e1">The monorepo separates a <b>pure engine</b> (RSS parsing, weighted scoring, synonyms, categorization: zero I/O, fully unit-tested) from serverless orchestration on Firebase, with a self-hosted RSSHub on Cloud Run. Curation runs on schedule, generation is adaptive (deep, focused or panorama depending on how much signal exists), and an anti-monopoly cap keeps any single source from dominating a feed.</p>
+      <p class="reveal" data-i18n="e2">Quality was enforced the hard way: four rounds of functional audit driving a real browser against production, DOM inspection included, which caught 40+ issues that a green CI never saw. LGPD is built in (export and delete account), and payments run through Stripe and Mercado Pago with HMAC-validated webhooks.</p>
+      <h2 class="reveal" style="margin-top:34px;" data-i18n="h2e">The pricing architecture</h2>
+      <p class="reveal" data-i18n="pr1">Three layers, all implemented and visible in the UI: subscriptions for cadence, credit packs for bursts, and model tiers per generation so the user chooses depth versus cost.</p>
+      <table class="reveal">
+        <tr><th data-i18n="th1">Layer</th><th data-i18n="th2">Design</th></tr>
+        <tr><td data-i18n="tr1a">Subscription</td><td data-i18n="tr1b">Free (2 Lexis/mo), Pro R$19.90/mo, Pro Plus R$39.90/mo with queue priority; annual at ~17% off</td></tr>
+        <tr><td data-i18n="tr2a">Credit packs</td><td data-i18n="tr2b">50 / 200 / 500 credits with decreasing unit price (R$0.40 to R$0.26), never expire</td></tr>
+        <tr><td data-i18n="tr3a">Model tiers</td><td data-i18n="tr3b">Economy 1 credit, Standard 5, Premium 8 per generation: depth is a user choice, not a plan wall</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k5"><b>05</b> / why it is on hold</p>
+      <h2 class="reveal" data-i18n="h2f">An honest pause</h2>
+      <p class="reveal" data-i18n="w1">During development, Lexi's token spend crossed the line of what my revenue-generating product (Auditor ATS) was bringing in. Part of that was LLM usage that still needed optimization work. With limited capital, I prioritized what was better assembled and earning, and paused Lexi at technical-beta stage: installable PWA live, store builds configured but unpublished.</p>
+      <p class="reveal" data-i18n="w2">What funding unlocks, in order: running the full system continuously, the academic-first layer at proper depth, and the voice model. The thesis did not get weaker while paused. Generated content keeps getting cheaper, which makes the filter worth more.</p>
+      <p class="reveal" style="margin-top:26px;"><a class="btn" href="https://github.com/felippeyann/felippeyann/blob/main/case-studies/lexi.md" data-i18n="cta1">Engineering case study &rarr;</a>&nbsp;&nbsp;<a class="btn" href="mailto:felippe.yann@gmail.com" data-i18n="cta2">Talk to me about it &rarr;</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&gt;_ felippe yann &middot; <a href="index.html" data-i18n="fback">back to portfolio</a></span>
+    <span><a href="https://github.com/felippeyann">github.com/felippeyann</a></span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const root = document.documentElement;
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    if (saved) root.setAttribute('data-theme', saved);
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) root.setAttribute('data-theme', 'light');
+    const btn = document.getElementById('themeToggle');
+    const paint = () => { btn.textContent = root.getAttribute('data-theme') === 'light' ? '☀' : '☾'; };
+    paint();
+    btn.addEventListener('click', () => {
+      const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', t);
+      try { localStorage.setItem('theme', t); } catch (e) {}
+      paint();
+    });
+  })();
+  const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  (function () {
+    const PT = {
+      nback: '&larr; TODOS OS PROJETOS',
+      hk: 'PRODUTO DE IA <b>//</b> BETA T&Eacute;CNICO, EM PAUSA',
+      lede: 'Curadoria personalizada de not&iacute;cias com IA e proveni&ecirc;ncia por afirma&ccedil;&atilde;o. Constru&iacute;do de ponta a ponta, rodando como PWA instal&aacute;vel, pausado antes do lan&ccedil;amento por um motivo honesto: unit economics.',
+      meta: '19 cloud functions <b>//</b> 192 testes unit&aacute;rios <b>//</b> cita&ccedil;&otilde;es como recurso de primeira classe',
+      k1: '<b>01</b> / a tese', h2a: 'A curadoria &eacute; o produto',
+      t1: 'A aposta por tr&aacute;s do Lexi &eacute; simples de enunciar: <b>num futuro de conte&uacute;do gerado por m&aacute;quina em grande escala, a curadoria de informa&ccedil;&atilde;o se torna um dos maiores poderes que existem.</b> Quando qualquer um produz texto plaus&iacute;vel infinito, a habilidade escassa &eacute; decidir o que merece aten&ccedil;&atilde;o, e provar por qu&ecirc;.',
+      q1: '"A internet de 2026 n&atilde;o tem problema de oferta. Tem problema de filtro. Quem filtra entrega mais valor que quem produz."',
+      q1s: 'Documento de vis&atilde;o do Lexi, 2026 (original em portugu&ecirc;s)',
+      t2: 'Duas consequ&ecirc;ncias de design: primeiro, <b>proveni&ecirc;ncia n&atilde;o &eacute; feature, &eacute; o contrato</b>: toda afirma&ccedil;&atilde;o sintetizada num Lexis carrega cita&ccedil;&atilde;o numerada de volta &agrave; fonte, com SLOs de alucina&ccedil;&atilde;o e cobertura de cita&ccedil;&otilde;es. Segundo, a fonte do sinal importa: o Lexi nasceu <b>academic-first</b>, constru&iacute;do em torno do arXiv e de feeds cient&iacute;ficos, onde hip&oacute;teses e solu&ccedil;&otilde;es aparecem antes de chegar ao ciclo de not&iacute;cias, com RSS geral adicionado depois para complementar a experi&ecirc;ncia. O objetivo &eacute; fugir do conte&uacute;do gen&eacute;rico.',
+      t3: 'O pr&oacute;ximo passo da tese, documentado mas ainda n&atilde;o constru&iacute;do, &eacute; <b>a voz do usu&aacute;rio</b>: aprender como cada pessoa escreve e aborda assuntos, para que o conte&uacute;do produzido depois da curadoria soe como ela, n&atilde;o como um modelo.',
+      k2: '<b>02</b> / de onde veio', h2b: 'De um grupo no Discord a um motor',
+      o1: 'O Lexi n&atilde;o come&ccedil;ou como ideia de startup. Come&ccedil;ou como h&aacute;bito: curar not&iacute;cias para um grupo de Discord que eu tinha com colegas de trabalho. A curadoria foi ficando melhor e, num certo ponto, deixou de ser um feed e virou motor: os dados curados passaram a gerar artigos completos e visualiza&ccedil;&otilde;es de dados por conta pr&oacute;pria.',
+      o2: 'Essa progress&atilde;o, curadoria para s&iacute;ntese para publica&ccedil;&atilde;o, &eacute; o produto. E ela se conecta &agrave; tese maior sob a qual eu trabalho: a pr&oacute;xima gera&ccedil;&atilde;o de grandes empresas de software vai parecer empresa de servi&ccedil;o, com fluxos de automa&ccedil;&atilde;o, integra&ccedil;&atilde;o e dados oferecendo servi&ccedil;os atrav&eacute;s de ferramentas de LLM. O Lexi &eacute; esse padr&atilde;o aplicado &agrave; pr&oacute;pria informa&ccedil;&atilde;o.',
+      k3: '<b>03</b> / o produto, em telas', h2c: 'Constru&iacute;do e rodando',
+      galn: 'Todas as telas capturadas do app ao vivo com conta sint&eacute;tica de auditoria. Tema escuro, design system "Lumen".',
+      g1b: 'O feed', g1s: 'Hero editorial, cards curados com capas de IA, mapa de palavras e sa&uacute;de das fontes num relance.',
+      g2b: 'Um Lexis, com recibos', g2s: '1.312 palavras sintetizadas de fontes curadas, cada afirma&ccedil;&atilde;o com cita&ccedil;&atilde;o numerada inline.',
+      g3b: 'O grafo de gosto', g3s: 'Templates de persona e 100+ keywords com peso. O score &eacute; vis&iacute;vel porque a tese diz que score sem explica&ccedil;&atilde;o &eacute; coer&ccedil;&atilde;o.',
+      g4b: 'Observat&oacute;rio da curadoria', g4s: 'KPIs com deltas e sinais autom&aacute;ticos sobre a sua pr&oacute;pria dieta de leitura.',
+      g5b: 'Temas emergentes', g5s: 'Clusters descobertos por IA com acelera&ccedil;&atilde;o (at&eacute; 17x), cada um &eacute; um Lexis esperando ser gerado.',
+      g6b: 'Score explic&aacute;vel', g6s: 'Todo artigo mostra o score, as keywords que deram match e um bot&atilde;o "por que este score?".',
+      g7b: 'Sa&uacute;de das fontes', g7s: 'Feeds com status, auto-pausa, redescoberta e caps anti-monop&oacute;lio por fonte.',
+      g8b: 'Monetiza&ccedil;&atilde;o ligada', g8s: 'Stripe para cart&atilde;o, Mercado Pago para Pix, pacotes de cr&eacute;dito com pre&ccedil;o unit&aacute;rio decrescente.',
+      k4: '<b>04</b> / por baixo do cap&ocirc;', h2d: 'Engenharia, n&atilde;o wrapper',
+      f1: 'cloud functions em produ&ccedil;&atilde;o', f2: 'testes unit&aacute;rios no motor puro', f3: 'issues reais achados por QA com automa&ccedil;&atilde;o de browser', f4: 'SLO de cobertura de cita&ccedil;&otilde;es',
+      e1: 'O monorepo separa um <b>motor puro</b> (parsing de RSS, scoring ponderado, sin&ocirc;nimos, categoriza&ccedil;&atilde;o: zero I/O, todo testado) da orquestra&ccedil;&atilde;o serverless no Firebase, com RSSHub self-hosted no Cloud Run. A curadoria roda agendada, a gera&ccedil;&atilde;o &eacute; adaptativa (deep, focused ou panorama conforme o sinal dispon&iacute;vel) e um cap anti-monop&oacute;lio impede qualquer fonte de dominar o feed.',
+      e2: 'A qualidade foi imposta do jeito dif&iacute;cil: quatro rodadas de auditoria funcional dirigindo um browser real contra a produ&ccedil;&atilde;o, com inspe&ccedil;&atilde;o de DOM, que pegaram 40+ issues que um CI verde nunca viu. LGPD nativa (exportar e excluir conta) e pagamentos via Stripe e Mercado Pago com webhooks validados por HMAC.',
+      h2e: 'A arquitetura de pricing',
+      pr1: 'Tr&ecirc;s camadas, todas implementadas e vis&iacute;veis na UI: assinatura para cad&ecirc;ncia, pacotes de cr&eacute;dito para picos, e tiers de modelo por gera&ccedil;&atilde;o para o usu&aacute;rio escolher profundidade versus custo.',
+      th1: 'Camada', th2: 'Design',
+      tr1a: 'Assinatura', tr1b: 'Free (2 Lexis/m&ecirc;s), Pro R$ 19,90/m&ecirc;s, Pro Plus R$ 39,90/m&ecirc;s com prioridade na fila; anual com ~17% off',
+      tr2a: 'Pacotes de cr&eacute;dito', tr2b: '50 / 200 / 500 cr&eacute;ditos com pre&ccedil;o unit&aacute;rio decrescente (R$ 0,40 a R$ 0,26), sem expira&ccedil;&atilde;o',
+      tr3a: 'Tiers de modelo', tr3b: 'Econ&ocirc;mico 1 cr&eacute;dito, Padr&atilde;o 5, Premium 8 por gera&ccedil;&atilde;o: profundidade &eacute; escolha do usu&aacute;rio, n&atilde;o muro de plano',
+      k5: '<b>05</b> / por que est&aacute; em pausa', h2f: 'Uma pausa honesta',
+      w1: 'Durante o desenvolvimento, o gasto de tokens do Lexi cruzou a linha do que meu produto com receita (Auditor ATS) estava trazendo. Parte disso era uso de LLM que ainda precisava de otimiza&ccedil;&atilde;o. Com capital limitado, priorizei o que estava melhor montado e rendendo, e pausei o Lexi no est&aacute;gio de beta t&eacute;cnico: PWA instal&aacute;vel no ar, builds de loja configurados mas n&atilde;o publicados.',
+      w2: 'O que o financiamento destrava, em ordem: rodar o sistema completo continuamente, a camada academic-first com a profundidade devida, e o modelo de voz. A tese n&atilde;o enfraqueceu na pausa. Conte&uacute;do gerado s&oacute; fica mais barato, o que torna o filtro mais valioso.',
+      cta1: 'Estudo de caso de engenharia &rarr;', cta2: 'Fala comigo sobre isso &rarr;',
+      fback: 'voltar ao portfolio'
+    };
+    const EN = {};
+    document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+    function apply(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = (lang === 'pt' ? PT : EN)[el.getAttribute('data-i18n')];
+        if (v != null) el.innerHTML = v;
+      });
+      document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+      document.querySelectorAll('[data-lang-btn]').forEach(b => {
+        const on = b.getAttribute('data-lang-btn') === lang;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let saved = 'en';
+    try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+    apply(saved === 'pt' ? 'pt' : 'en');
+    document.querySelectorAll('[data-lang-btn]').forEach(b => b.addEventListener('click', () => apply(b.getAttribute('data-lang-btn'))));
+  })();
+</script>
+</body>
+</html>

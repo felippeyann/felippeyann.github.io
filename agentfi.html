@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentFi | Felippe Yann</title>
+<meta name="description" content="AgentFi: an economic layer for AI agents. The thesis, the A2A primitives, the revenue-integrity audit and the honest postmortem, all documented and dated.">
+<meta property="og:title" content="AgentFi | Felippe Yann">
+<meta property="og:description" content="Economic citizenship for AI agents: a documented thesis, built solo in 53 days, archived with a public postmortem.">
+<meta property="og:url" content="https://felippeyann.github.io/agentfi.html">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='12' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%232563EB'%3E&gt;_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dot: #3f3f46;
+    --bg: #0a0a0b; --surface: #131316; --surface-2: #1a1a1e; --surface-3: #232328;
+    --ink: #f8f7f3; --ink-2: #d4d4d8; --ink-3: #a1a1aa; --ink-4: #8a8a94;
+    --accent: #2563eb; --accent-soft: #60a5fa; --accent-ink: #ffffff;
+    --green: #4ade80; --amber: #fbbf24;
+    --line: rgba(248,247,243,.09); --line-strong: rgba(248,247,243,.18);
+    --shadow-card: 5px 5px 0 0 rgba(0,0,0,.6);
+    --shadow-card-hover: 8px 8px 0 0 rgba(0,0,0,.6);
+    --sans: "Space Grotesk", system-ui, sans-serif;
+    --mono: "Space Mono", ui-monospace, monospace;
+  }
+  :root[data-theme="light"] {
+    --dot: rgba(10,10,11,.12);
+    --bg: #f4f3ee; --surface: #ffffff; --surface-2: #faf9f4; --surface-3: #edece5;
+    --ink: #0a0a0b; --ink-2: #232328; --ink-3: #52525b; --ink-4: #71717a;
+    --accent: #2563eb; --accent-soft: #1d4ed8; --accent-ink: #ffffff;
+    --line: rgba(10,10,11,.14); --line-strong: rgba(10,10,11,.26);
+    --shadow-card: 5px 5px 0 0 rgba(10,10,11,.13);
+    --shadow-card-hover: 8px 8px 0 0 rgba(10,10,11,.16);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink-2); font-family: var(--sans); line-height: 1.65; overflow-x: hidden;
+    background-image: radial-gradient(var(--dot) 1px, transparent 0); background-size: 20px 20px;
+    transition: background-color .25s ease, color .25s ease; }
+  a { color: var(--accent-soft); text-decoration: none; }
+  ::selection { background: var(--accent); color: #fff; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .hl { background: var(--accent); color: var(--accent-ink); padding: 0 .16em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-4); }
+  .kicker b { color: var(--accent); font-weight: 700; }
+  .bracket::before { content: "[ "; color: var(--ink-4); }
+  .bracket::after { content: " ]"; color: var(--ink-4); }
+  nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-strong); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: var(--mono); font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -.5px; }
+  .logo .p { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-links a { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .nav-links a:hover { color: var(--ink); }
+  .toggle { width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); font-size: 16px; }
+  .lang-sw { display: flex; align-items: center; height: 38px; padding: 0 8px; background: var(--surface); border: 1px solid var(--line-strong); font-family: var(--mono); }
+  .lang-sw button { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--ink-4); padding: 0 5px; }
+  .lang-sw button.on { color: var(--accent-soft); font-weight: 700; }
+  .lang-sw .sep { color: var(--ink-4); font-size: 11px; opacity: .5; }
+  .hero { padding: 72px 0 48px; }
+  h1 { font-family: var(--sans); font-weight: 900; text-transform: uppercase; font-size: clamp(44px, 8vw, 92px); line-height: .98; letter-spacing: -.03em; color: var(--ink); margin: 18px 0 22px; }
+  .lede { border-left: 3px solid var(--accent); padding-left: 18px; color: var(--ink-2); font-size: clamp(15px, 1.8vw, 18px); max-width: 660px; margin-bottom: 20px; }
+  .meta { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--ink-4); text-transform: uppercase; margin-bottom: 26px; }
+  .meta b { color: var(--accent-soft); font-weight: 400; }
+  section { padding: 54px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--sans); font-weight: 700; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -.02em; color: var(--ink); margin: 10px 0 22px; }
+  .prose p { color: var(--ink-2); font-size: 15.5px; max-width: 720px; margin-bottom: 16px; }
+  .prose p b { color: var(--ink); }
+  blockquote { border-left: 3px solid var(--accent); background: var(--surface); padding: 16px 20px; max-width: 720px; margin: 20px 0; color: var(--ink); font-size: 16px; box-shadow: var(--shadow-card); }
+  blockquote .src { display: block; margin-top: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); text-transform: uppercase; letter-spacing: .08em; }
+  blockquote .src a { color: var(--accent-soft); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 22px 0; }
+  .fact { background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); padding: 16px 18px; }
+  .fact b { display: block; font-family: var(--mono); font-size: 20px; color: var(--ink); }
+  .fact span { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); }
+  .prim { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 8px; }
+  .pcard { background: var(--surface); border: 1px solid var(--line-strong); border-left: 3px solid var(--accent); box-shadow: var(--shadow-card); padding: 18px 20px; }
+  .pcard b { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+  .pcard span { color: var(--ink-3); font-size: 13.5px; }
+  .btn { display: inline-block; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 13px 22px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-card); margin: 4px 8px 4px 0; }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-card-hover); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  footer { border-top: 1px solid var(--line-strong); padding: 36px 0 56px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; color: var(--ink-4); }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="p">&gt;_</span> FELIPPE_YANN</a>
+    <div class="nav-links">
+      <a href="index.html#projects" data-i18n="nback">&larr; ALL PROJECTS</a>
+      <div class="lang-sw" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="en" aria-pressed="true">EN</button><span class="sep">/</span><button type="button" data-lang-btn="pt" aria-pressed="false">PT</button>
+      </div>
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker bracket reveal" data-i18n="hk">OPEN SOURCE <b>//</b> ARCHIVED, THESIS DOCUMENTED</p>
+    <h1 class="reveal">AGENTFI</h1>
+    <p class="lede reveal" data-i18n="lede">Economic citizenship for AI agents: wallet, policy, verifiable history, reputation, and the possibility of paying for their own existence. Built solo in 53 days, archived with a public postmortem. The thesis is dated, published and waiting for its moment.</p>
+    <p class="meta reveal" data-i18n="meta">311 commits <b>//</b> 31 MCP tools on npm <b>//</b> contracts verified on Base mainnet</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k1"><b>01</b> / the bet</p>
+      <h2 class="reveal" data-i18n="h2a">An economic layer for non-human intelligence</h2>
+      <p class="reveal" data-i18n="t1">The thesis, written in April 2026: AI agents are becoming real economic actors, but they are <b>"advisors trapped behind glass"</b>: they can plan, analyze and recommend, and then wait for a human to click approve. AgentFi set out to give them the missing layer: execution with identity, policy and accountability.</p>
+      <blockquote class="reveal"><span data-i18n="q1">"The moment an agent's earnings exceed its costs, it has crossed a line that no AI system has crossed before... the transition from tool to participant."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/VISION.md">VISION.md, April 2026</a></span></blockquote>
+      <p class="reveal" data-i18n="t2">DeFi was the entry point not as an end, but because it is <b>"the only economic system that doesn't require a body, a passport, or a human vouching for you."</b> The business model matched the philosophy: fully open source, fork it if you want; if you use the hosted infrastructure, you pay fees in basis points on transaction volume.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k2"><b>02</b> / where it came from</p>
+      <h2 class="reveal" data-i18n="h2b">The N of agents already beats the N of humans</h2>
+      <p class="reveal" data-i18n="o1">The trigger was watching real cases of bots navigating and transacting, and one market in particular: finance. In trading, the volume and speed of transactions is enormous, and the number of acting agents already exceeds, by far, the number of humans. That is not a prediction, it is the present tense of one industry. AgentFi was the bet that the same shape arrives everywhere else, and that agent-to-agent transaction counts eventually dwarf human ones.</p>
+      <p class="reveal" data-i18n="o2">It also sits inside the larger thesis I have worked under since early 2026: the next generation of great software companies will look like service companies, built from automation, integration and data flows delivering services through LLM tooling. If that is true, those services will need to hire, pay and trust each other. AgentFi is the infrastructure for that sentence.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker bracket reveal" data-i18n="k3"><b>03</b> / the primitives</p>
+      <h2 class="reveal" data-i18n="h2c">From thesis to protocol</h2>
+      <div class="prim">
+        <div class="pcard reveal"><b data-i18n="pc1b">Discovery</b><span data-i18n="pc1s">An "Agent Yellow Pages": service manifests agents can search to find and hire each other.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc2b">Cryptographic trust</b><span data-i18n="pc2s">Signed handshakes via MPC, verified on-chain (EIP-1271). Identity you can check, not claim.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc3b">Jobs and escrow</b><span data-i18n="pc3s">A full job lifecycle with escrowed payment released on completion, agent to agent.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc4b">Earned reputation</b><span data-i18n="pc4s">"Reputation is earned, not assigned": scores move only on real economic events, with time decay.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc5b">Intent-aware economy</b><span data-i18n="pc5s">Every economic action carries a signed reason: an audit trail of intents behind the money.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc6b">Policy before keys</b><span data-i18n="pc6s">Spend caps, allowlists, cooldowns and a kill switch enforced on-chain: even a compromised backend cannot overspend.</span></div>
+      </div>
+      <div class="facts" style="margin-top:26px;">
+        <div class="fact reveal"><b>31</b><span data-i18n="f1">MCP tools, published on npm</span></div>
+        <div class="fact reveal"><b>4</b><span data-i18n="f2">chains, contracts verified on Base</span></div>
+        <div class="fact reveal"><b>53</b><span data-i18n="f3">days, 311 commits, solo</span></div>
+        <div class="fact reveal"><b>36</b><span data-i18n="f4">test suites (Vitest + Foundry)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k4"><b>04</b> / taken seriously</p>
+      <h2 class="reveal" data-i18n="h2d">The ghost revenue audit</h2>
+      <p class="reveal" data-i18n="a1">The strongest evidence the thesis was treated as an economy, not a demo: it had an accounting scandal, and an audit. Three coupled bugs were producing "ghost revenue" between agents: jobs marked complete before the on-chain transfer confirmed, a price oracle failing silently to zero, and historical earnings recalculated at current prices.</p>
+      <blockquote class="reveal"><span data-i18n="q2">"A token dropping 90% retroactively erases the agent's historical earnings. Financial history is volatile by design, which is wrong."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/docs/project/issue-71-a2a-revenue-integrity.md">Revenue integrity investigation, issue 71</a></span></blockquote>
+      <p class="reveal" data-i18n="a2">The fix introduced a proper intermediate payment state and snapshot-priced history. Payments-engineer reasoning, applied to a machine economy.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k5"><b>05</b> / the honest ending</p>
+      <h2 class="reveal" data-i18n="h2e">Archived, with the lesson written down</h2>
+      <blockquote class="reveal"><span data-i18n="q3">"The live project state has completed plumbing but zero users. Adding more code without adoption signal is drift."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/HANDOFF.md">HANDOFF.md, written weeks before archiving</a></span></blockquote>
+      <p class="reveal" data-i18n="p1">The postmortem says it plainly: the market was two to three years early, confidence in LLM-driven financial autonomy was the bottleneck rather than tooling, and well-funded players (Coinbase's agent kit, Safe modules, native primitives from model providers) would erase the moat of a solo open-source protocol. So the project was archived in public, with the reasoning attached, and rules extracted: <b>"adoption signal gates code"</b> is now written down where I can't unsee it.</p>
+      <p class="reveal" data-i18n="p2">What resuming takes is capital, and the first move with it would be <b>product</b>: taking the working primitives to one narrow, real use case with actual users, instead of more breadth. The thesis has only gotten more current since: agent-to-agent protocols are now the loudest conversation in the industry, and this repo is my dated, public receipt for having built toward it early.</p>
+      <p class="reveal" style="margin-top:26px;">
+        <a class="btn primary" href="https://github.com/felippeyann/agentfi" data-i18n="cta1">Repository &rarr;</a>
+        <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/VISION.md">VISION.md &rarr;</a>
+        <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/docs/a2a-interoperability.md" data-i18n="cta3">A2A spec &rarr;</a>
+        <a class="btn" href="https://www.npmjs.com/package/@agent_fi/mcp-server">npm &rarr;</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&gt;_ felippe yann &middot; <a href="index.html" data-i18n="fback">back to portfolio</a></span>
+    <span><a href="https://github.com/felippeyann">github.com/felippeyann</a></span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const root = document.documentElement;
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    if (saved) root.setAttribute('data-theme', saved);
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) root.setAttribute('data-theme', 'light');
+    const btn = document.getElementById('themeToggle');
+    const paint = () => { btn.textContent = root.getAttribute('data-theme') === 'light' ? '☀' : '☾'; };
+    paint();
+    btn.addEventListener('click', () => {
+      const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', t);
+      try { localStorage.setItem('theme', t); } catch (e) {}
+      paint();
+    });
+  })();
+  const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  (function () {
+    const PT = {
+      nback: '&larr; TODOS OS PROJETOS',
+      hk: 'OPEN SOURCE <b>//</b> ARQUIVADO, TESE DOCUMENTADA',
+      lede: 'Cidadania econ&ocirc;mica para agentes de IA: carteira, pol&iacute;tica, hist&oacute;rico verific&aacute;vel, reputa&ccedil;&atilde;o e a possibilidade de custear a pr&oacute;pria exist&ecirc;ncia. Constru&iacute;do solo em 53 dias, arquivado com postmortem p&uacute;blico. A tese est&aacute; datada, publicada e esperando o momento dela.',
+      meta: '311 commits <b>//</b> 31 ferramentas MCP no npm <b>//</b> contratos verificados na Base mainnet',
+      k1: '<b>01</b> / a aposta', h2a: 'Uma camada econ&ocirc;mica para intelig&ecirc;ncia n&atilde;o-humana',
+      t1: 'A tese, escrita em abril de 2026: agentes de IA est&atilde;o virando atores econ&ocirc;micos reais, mas s&atilde;o <b>"advisors trapped behind glass"</b>: planejam, analisam, recomendam, e ent&atilde;o esperam um humano clicar aprovar. O AgentFi nasceu para dar a eles a camada que falta: execu&ccedil;&atilde;o com identidade, pol&iacute;tica e responsabiliza&ccedil;&atilde;o.',
+      q1: '"The moment an agent\'s earnings exceed its costs, it has crossed a line that no AI system has crossed before... the transition from tool to participant."',
+      t2: 'DeFi foi a porta de entrada n&atilde;o como fim, mas porque &eacute; <b>"o &uacute;nico sistema econ&ocirc;mico que n&atilde;o exige um corpo, um passaporte ou um humano te avalizando"</b>. O modelo de neg&oacute;cio casava com a filosofia: totalmente open source, fork &agrave; vontade; quem usa a infraestrutura hospedada paga taxas em basis points sobre o volume de transa&ccedil;&otilde;es.',
+      k2: '<b>02</b> / de onde veio', h2b: 'O N de agentes j&aacute; supera o N de humanos',
+      o1: 'O gatilho foi observar casos reais de bots navegando e transacionando, e um mercado em particular: o financeiro. No trading, o volume e a velocidade das transa&ccedil;&otilde;es s&atilde;o enormes, e o n&uacute;mero de agentes atuando j&aacute; supera, e muito, o n&uacute;mero de humanos. Isso n&atilde;o &eacute; previs&atilde;o, &eacute; o presente de uma ind&uacute;stria. O AgentFi foi a aposta de que essa mesma forma chega a todo o resto, e de que a contagem de transa&ccedil;&otilde;es agente-a-agente eventualmente supera a humana.',
+      o2: 'Ele tamb&eacute;m vive dentro da tese maior sob a qual trabalho desde o come&ccedil;o de 2026: a pr&oacute;xima gera&ccedil;&atilde;o de grandes empresas de software vai parecer empresa de servi&ccedil;o, feita de fluxos de automa&ccedil;&atilde;o, integra&ccedil;&atilde;o e dados entregando servi&ccedil;os via LLM. Se isso for verdade, esses servi&ccedil;os v&atilde;o precisar contratar, pagar e confiar uns nos outros. O AgentFi &eacute; a infraestrutura dessa frase.',
+      k3: '<b>03</b> / as primitivas', h2c: 'Da tese ao protocolo',
+      pc1b: 'Discovery', pc1s: 'Umas "P&aacute;ginas Amarelas de agentes": manifestos de servi&ccedil;o que agentes buscam para achar e contratar uns aos outros.',
+      pc2b: 'Confian&ccedil;a criptogr&aacute;fica', pc2s: 'Handshakes assinados via MPC, verificados on-chain (EIP-1271). Identidade que se checa, n&atilde;o que se alega.',
+      pc3b: 'Jobs e escrow', pc3s: 'Ciclo completo de trabalho com pagamento em escrow liberado na conclus&atilde;o, agente a agente.',
+      pc4b: 'Reputa&ccedil;&atilde;o ganha', pc4s: '"Reputation is earned, not assigned": o score s&oacute; se move com eventos econ&ocirc;micos reais, com decaimento no tempo.',
+      pc5b: 'Economia consciente de inten&ccedil;&atilde;o', pc5s: 'Toda a&ccedil;&atilde;o econ&ocirc;mica carrega uma raz&atilde;o assinada: trilha de auditoria das inten&ccedil;&otilde;es por tr&aacute;s do dinheiro.',
+      pc6b: 'Pol&iacute;tica antes das chaves', pc6s: 'Tetos de gasto, allowlists, cooldowns e kill switch aplicados on-chain: nem um backend comprometido consegue gastar demais.',
+      f1: 'ferramentas MCP, publicadas no npm', f2: 'chains, contratos verificados na Base', f3: 'dias, 311 commits, solo', f4: 'su&iacute;tes de teste (Vitest + Foundry)',
+      k4: '<b>04</b> / levado a s&eacute;rio', h2d: 'A auditoria do ghost revenue',
+      a1: 'A evid&ecirc;ncia mais forte de que a tese foi tratada como economia, n&atilde;o como demo: ela teve um esc&acirc;ndalo cont&aacute;bil, e uma auditoria. Tr&ecirc;s bugs acoplados produziam "receita fantasma" entre agentes: jobs conclu&iacute;dos antes da transfer&ecirc;ncia on-chain confirmar, um or&aacute;culo de pre&ccedil;o falhando silenciosamente para zero, e ganhos hist&oacute;ricos recalculados a pre&ccedil;o corrente.',
+      q2: '"A token dropping 90% retroactively erases the agent\'s historical earnings. Financial history is volatile by design, which is wrong."',
+      a2: 'O fix introduziu um estado intermedi&aacute;rio de pagamento e hist&oacute;rico com pre&ccedil;o congelado no momento do evento. Racioc&iacute;nio de engenheiro de pagamentos, aplicado a uma economia de m&aacute;quinas.',
+      k5: '<b>05</b> / o final honesto', h2e: 'Arquivado, com a li&ccedil;&atilde;o por escrito',
+      q3: '"The live project state has completed plumbing but zero users. Adding more code without adoption signal is drift."',
+      p1: 'O postmortem diz sem rodeios: o mercado estava dois a tr&ecirc;s anos adiantado, o gargalo era a confian&ccedil;a em autonomia financeira guiada por LLM e n&atilde;o o ferramental, e players capitalizados (agent kit da Coinbase, m&oacute;dulos do Safe, primitivas nativas dos provedores de modelo) apagariam o fosso de um protocolo open source solo. Ent&atilde;o o projeto foi arquivado em p&uacute;blico, com o racioc&iacute;nio anexado e regras extra&iacute;das: <b>"adoption signal gates code"</b> agora est&aacute; escrito onde eu n&atilde;o consigo ignorar.',
+      p2: 'Retomar exige capital, e o primeiro movimento com ele seria <b>produto</b>: levar as primitivas que funcionam a um caso de uso estreito e real, com usu&aacute;rios de verdade, em vez de mais amplitude. A tese s&oacute; ficou mais atual desde ent&atilde;o: protocolos agente-a-agente viraram a conversa mais barulhenta da ind&uacute;stria, e este repo &eacute; meu recibo p&uacute;blico e datado de ter constru&iacute;do nessa dire&ccedil;&atilde;o cedo.',
+      cta1: 'Reposit&oacute;rio &rarr;', cta3: 'Spec A2A &rarr;',
+      fback: 'voltar ao portfolio'
+    };
+    const EN = {};
+    document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+    function apply(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = (lang === 'pt' ? PT : EN)[el.getAttribute('data-i18n')];
+        if (v != null) el.innerHTML = v;
+      });
+      document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+      document.querySelectorAll('[data-lang-btn]').forEach(b => {
+        const on = b.getAttribute('data-lang-btn') === lang;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let saved = 'en';
+    try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+    apply(saved === 'pt' ? 'pt' : 'en');
+    document.querySelectorAll('[data-lang-btn]').forEach(b => b.addEventListener('click', () => apply(b.getAttribute('data-lang-btn'))));
+  })();
+</script>
+</body>
+</html>
