@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AgentFi | Felippe Yann</title>
-<meta name="description" content="AgentFi: an economic layer for AI agents. The thesis, the A2A primitives, the revenue-integrity audit and the honest postmortem, all documented and dated.">
+<meta name="description" content="AgentFi, a developer alpha: spend rules and a ledger for AI agents that buy paid APIs over x402, runnable locally on a fork. Why it was archived in May 2026, why it changed direction, and what you can try today.">
 <meta property="og:title" content="AgentFi | Felippe Yann">
-<meta property="og:description" content="Economic citizenship for AI agents: a documented thesis, built solo in 53 days, archived with a public postmortem.">
+<meta property="og:description" content="Developer alpha: spend rules and a ledger for AI agents that buy paid APIs. Archived in May 2026, narrowed and reopened in November. Run the demo locally.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://felippeyann.github.io/assets/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://felippeyann.github.io/agentfi.html">
 <meta name="theme-color" content="#0a0a0b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='12' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%232563EB'%3E&gt;_%3C/text%3E%3C/svg%3E">
@@ -107,76 +110,96 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker bracket reveal" data-i18n="hk">OPEN SOURCE <b>//</b> ARCHIVED, THESIS DOCUMENTED</p>
+    <p class="kicker bracket reveal" data-i18n="hk">OPEN SOURCE <b>//</b> DEVELOPER ALPHA</p>
     <h1 class="reveal">AGENTFI</h1>
-    <p class="lede reveal" data-i18n="lede">Economic citizenship for AI agents: wallet, policy, verifiable history, reputation, and the possibility of paying for their own existence. Built solo in 53 days, archived with a public postmortem. The thesis is dated, published and waiting for its moment.</p>
-    <p class="meta reveal" data-i18n="meta">311 commits <b>//</b> 31 MCP tools on npm <b>//</b> contracts verified on Base mainnet</p>
+    <p class="lede reveal" data-i18n="lede">Spend rules and a ledger for AI agents that buy paid APIs. A company's buyer agent pays for an API over x402 from its own wallet, within a job budget; the operator sets the limits and the sellers it may pay, a purchase that breaks them is refused before anything is signed, and every purchase is recorded with payment and delivery kept apart. I built it solo, archived it in May 2026, and reopened it in November as a narrower developer alpha.</p>
+    <p class="meta reveal" data-i18n="meta">Developer alpha since Nov 2026 <b>//</b> runs locally on a fork <b>//</b> no real money, no hosted service</p>
+    <p class="reveal">
+      <a class="btn primary" href="https://agentfi.cc" data-i18n="cta0">agentfi.cc &rarr;</a>
+      <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/docs/alpha/quickstart.md" data-i18n="cta1">Run the local demo &rarr;</a>
+      <a class="btn" href="https://github.com/felippeyann/agentfi" data-i18n="cta2">Code &rarr;</a>
+    </p>
   </div>
 </header>
 
 <main>
   <section>
-    <div class="wrap prose">
-      <p class="kicker bracket reveal" data-i18n="k1"><b>01</b> / the bet</p>
-      <h2 class="reveal" data-i18n="h2a">An economic layer for non-human intelligence</h2>
-      <p class="reveal" data-i18n="t1">The thesis, written in April 2026: AI agents are becoming real economic actors, but they are <b>"advisors trapped behind glass"</b>: they can plan, analyze and recommend, and then wait for a human to click approve. AgentFi set out to give them the missing layer: execution with identity, policy and accountability.</p>
-      <blockquote class="reveal"><span data-i18n="q1">"The moment an agent's earnings exceed its costs, it has crossed a line that no AI system has crossed before... the transition from tool to participant."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/VISION.md">VISION.md, April 2026</a></span></blockquote>
-      <p class="reveal" data-i18n="t2">DeFi was the entry point not as an end, but because it is <b>"the only economic system that doesn't require a body, a passport, or a human vouching for you."</b> The business model matched the philosophy: fully open source, fork it if you want; if you use the hosted infrastructure, you pay fees in basis points on transaction volume.</p>
+    <div class="wrap">
+      <p class="kicker bracket reveal" data-i18n="k1"><b>01</b> / what you can try today</p>
+      <h2 class="reveal" data-i18n="h2a">One command, a local fork, two outcomes</h2>
+      <div class="prim">
+        <div class="pcard reveal"><b data-i18n="pc1b">Run it locally</b><span data-i18n="pc1s"><code>npm run alpha:demo</code> starts a local Anvil fork of Base Sepolia with test USDC, the AgentFi API and its worker, and a test seller. No accounts, keys or funds.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc2b">Allowed, then blocked</b><span data-i18n="pc2s">An allowed purchase settles and is proven on-chain. One over the per-payment limit or the job budget is refused before signing: no signature, nothing moved, not counted.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc3b">Payment is not delivery</b><span data-i18n="pc3s">The ledger keeps what was paid apart from what arrived, so a lost response is reconciled from the chain instead of being paid twice.</span></div>
+        <div class="pcard reveal"><b data-i18n="pc4b">From an agent framework</b><span data-i18n="pc4s">The OpenAI Agents SDK ran the same purchases through the MCP server, on the fork, with a scripted model (no LLM). Other frameworks so far only against a stub.</span></div>
+      </div>
+      <p class="reveal" style="margin-top:22px;max-width:720px;color:var(--ink-3);font-size:14.5px;" data-i18n="lim">Limits, stated where they matter: everything shown runs on a local fork; nothing on mainnet, no real money, no public-testnet proof yet, and no hosted service. Feedback goes through GitHub issue forms (a GitHub account is needed).</p>
+      <p class="reveal" style="margin-top:18px;">
+        <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/docs/alpha/quickstart.md" data-i18n="cta3">Quickstart &rarr;</a>
+        <a class="btn" href="https://github.com/felippeyann/agentfi/issues/new/choose" data-i18n="cta4">Send feedback &rarr;</a>
+      </p>
     </div>
   </section>
 
   <section>
     <div class="wrap prose">
-      <p class="kicker bracket reveal" data-i18n="k2"><b>02</b> / where it came from</p>
-      <h2 class="reveal" data-i18n="h2b">The N of agents already beats the N of humans</h2>
-      <p class="reveal" data-i18n="o1">The trigger was watching real cases of bots navigating and transacting, and one market in particular: finance. In trading, the volume and speed of transactions is enormous, and the number of acting agents already exceeds, by far, the number of humans. That is not a prediction, it is the present tense of one industry. AgentFi was the bet that the same shape arrives everywhere else, and that agent-to-agent transaction counts eventually dwarf human ones.</p>
-      <p class="reveal" data-i18n="o2">It also sits inside the larger thesis I have worked under since early 2026: the next generation of great software companies will look like service companies, built from automation, integration and data flows delivering services through LLM tooling. If that is true, those services will need to hire, pay and trust each other. AgentFi is the infrastructure for that sentence.</p>
+      <p class="kicker bracket reveal" data-i18n="k2"><b>02</b> / why it changed direction</p>
+      <h2 class="reveal" data-i18n="h2b">From a broad thesis to one buyer-side problem</h2>
+      <p class="reveal" data-i18n="t1">AgentFi started in April 2026 as a broad bet: give AI agents a whole economic layer (wallet, policy, history, reputation, DeFi execution). I built it alone and it grew wide, but it never found a user, so on 17 May 2026 I archived it in public, with a postmortem and one rule written down: <b>"adoption signal gates code"</b>.</p>
+      <p class="reveal" data-i18n="t2">By October the market had moved toward the thesis: x402 became a shared standard for paying APIs over HTTP, and agent wallets with spending limits turned into a commodity. That made the wide version pointless and one narrow piece useful. In November 2026 it came back as a developer alpha for companies whose agents buy services: <b>rules before the payment, and a ledger the operator can trust after it</b>, consumed over HTTP or MCP from whatever agent framework they already use.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <p class="kicker bracket reveal" data-i18n="k3"><b>03</b> / the original bet, April 2026</p>
+      <h2 class="reveal" data-i18n="h2c">Agents as economic actors</h2>
+      <p class="reveal" data-i18n="o0">The thesis as written then: AI agents are becoming real economic actors, but they are <b>"advisors trapped behind glass"</b>: they plan, analyze and recommend, and then wait for a human to click approve.</p>
+      <blockquote class="reveal"><span data-i18n="q1">"The moment an agent's earnings exceed its costs, it has crossed a line that no AI system has crossed before... the transition from tool to participant."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/VISION.md">VISION.md, April 2026</a></span></blockquote>
+      <p class="reveal" data-i18n="o1">The trigger was watching real cases of bots navigating and transacting, and one market in particular: finance, where the number of acting agents already exceeds, by far, the number of humans. AgentFi was the bet that the same shape arrives everywhere else. It sits inside a larger thesis I have worked under since early 2026: the next great software companies will look like service companies built from automation, integration and data flows, and those services will need to hire, pay and trust each other.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <p class="kicker bracket reveal" data-i18n="k3"><b>03</b> / the primitives</p>
-      <h2 class="reveal" data-i18n="h2c">From thesis to protocol</h2>
+      <p class="kicker bracket reveal" data-i18n="k4"><b>04</b> / the archived version, April to May 2026</p>
+      <h2 class="reveal" data-i18n="h2d">What the first version built</h2>
+      <p class="reveal" style="max-width:720px;color:var(--ink-3);font-size:14.5px;margin-bottom:16px;" data-i18n="hist">A dated record. These were the primitives and the counts at archiving; they are not indicators of the current alpha, which uses none of the contracts below.</p>
       <div class="prim">
-        <div class="pcard reveal"><b data-i18n="pc1b">Discovery</b><span data-i18n="pc1s">An "Agent Yellow Pages": service manifests agents can search to find and hire each other.</span></div>
-        <div class="pcard reveal"><b data-i18n="pc2b">Cryptographic trust</b><span data-i18n="pc2s">Signed handshakes via MPC, verified on-chain (EIP-1271). Identity you can check, not claim.</span></div>
-        <div class="pcard reveal"><b data-i18n="pc3b">Jobs and escrow</b><span data-i18n="pc3s">A full job lifecycle with escrowed payment released on completion, agent to agent.</span></div>
-        <div class="pcard reveal"><b data-i18n="pc4b">Earned reputation</b><span data-i18n="pc4s">"Reputation is earned, not assigned": scores move only on real economic events, with time decay.</span></div>
-        <div class="pcard reveal"><b data-i18n="pc5b">Intent-aware economy</b><span data-i18n="pc5s">Every economic action carries a signed reason: an audit trail of intents behind the money.</span></div>
-        <div class="pcard reveal"><b data-i18n="pc6b">Policy before keys</b><span data-i18n="pc6s">Spend caps, allowlists, cooldowns and a kill switch enforced on-chain: even a compromised backend cannot overspend.</span></div>
+        <div class="pcard reveal"><b data-i18n="hp1b">Discovery</b><span data-i18n="hp1s">An "Agent Yellow Pages": service manifests agents could search to find and hire each other.</span></div>
+        <div class="pcard reveal"><b data-i18n="hp2b">Jobs and escrow</b><span data-i18n="hp2s">A job lifecycle with escrowed payment released on completion, agent to agent. A job's reward still caps what the alpha's buyer may spend.</span></div>
+        <div class="pcard reveal"><b data-i18n="hp3b">Earned reputation</b><span data-i18n="hp3s">"Reputation is earned, not assigned": scores moved only on real economic events, with time decay.</span></div>
+        <div class="pcard reveal"><b data-i18n="hp4b">Policy before keys</b><span data-i18n="hp4s">Spend caps, allowlists, cooldowns and a kill switch around every transaction: the idea the alpha kept and narrowed.</span></div>
       </div>
       <div class="facts" style="margin-top:26px;">
-        <div class="fact reveal"><b>31</b><span data-i18n="f1">MCP tools, published on npm</span></div>
-        <div class="fact reveal"><b>4</b><span data-i18n="f2">chains, contracts verified on Base</span></div>
-        <div class="fact reveal"><b>53</b><span data-i18n="f3">days, 311 commits, solo</span></div>
-        <div class="fact reveal"><b>36</b><span data-i18n="f4">test suites (Vitest + Foundry)</span></div>
+        <div class="fact reveal"><b>53</b><span data-i18n="f1">days solo, 311 commits (at archiving)</span></div>
+        <div class="fact reveal"><b>31</b><span data-i18n="f2">MCP tools (at archiving)</span></div>
+        <div class="fact reveal"><b>4</b><span data-i18n="f3">chains; legacy contracts on Base mainnet</span></div>
+        <div class="fact reveal"><b>0</b><span data-i18n="f4">users, which is why it was archived</span></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap prose">
-      <p class="kicker bracket reveal" data-i18n="k4"><b>04</b> / taken seriously</p>
-      <h2 class="reveal" data-i18n="h2d">The ghost revenue audit</h2>
-      <p class="reveal" data-i18n="a1">The strongest evidence the thesis was treated as an economy, not a demo: it had an accounting scandal, and an audit. Three coupled bugs were producing "ghost revenue" between agents: jobs marked complete before the on-chain transfer confirmed, a price oracle failing silently to zero, and historical earnings recalculated at current prices.</p>
+      <p class="kicker bracket reveal" data-i18n="k5"><b>05</b> / taken seriously</p>
+      <h2 class="reveal" data-i18n="h2e">The ghost revenue audit</h2>
+      <p class="reveal" data-i18n="a1">Evidence the first version was treated as an economy, not a demo: it had an accounting bug, and an audit. Three coupled bugs were producing "ghost revenue" between agents: jobs marked complete before the on-chain transfer confirmed, a price oracle failing silently to zero, and historical earnings recalculated at current prices.</p>
       <blockquote class="reveal"><span data-i18n="q2">"A token dropping 90% retroactively erases the agent's historical earnings. Financial history is volatile by design, which is wrong."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/docs/project/issue-71-a2a-revenue-integrity.md">Revenue integrity investigation, issue 71</a></span></blockquote>
-      <p class="reveal" data-i18n="a2">The fix introduced a proper intermediate payment state and snapshot-priced history. Payments-engineer reasoning, applied to a machine economy.</p>
+      <p class="reveal" data-i18n="a2">The fix introduced a proper intermediate payment state and snapshot-priced history. The same instinct, that a payment and its evidence are separate facts, is the core of the alpha's ledger.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap prose">
-      <p class="kicker bracket reveal" data-i18n="k5"><b>05</b> / the honest ending</p>
-      <h2 class="reveal" data-i18n="h2e">Archived, with the lesson written down</h2>
+      <p class="kicker bracket reveal" data-i18n="k6"><b>06</b> / the postmortem, May 2026</p>
+      <h2 class="reveal" data-i18n="h2f">Archived, with the lesson written down</h2>
       <blockquote class="reveal"><span data-i18n="q3">"The live project state has completed plumbing but zero users. Adding more code without adoption signal is drift."</span><span class="src"><a href="https://github.com/felippeyann/agentfi/blob/main/HANDOFF.md">HANDOFF.md, written weeks before archiving</a></span></blockquote>
-      <p class="reveal" data-i18n="p1">The postmortem says it plainly: the market was two to three years early, confidence in LLM-driven financial autonomy was the bottleneck rather than tooling, and well-funded players (Coinbase's agent kit, Safe modules, native primitives from model providers) would erase the moat of a solo open-source protocol. So the project was archived in public, with the reasoning attached, and rules extracted: <b>"adoption signal gates code"</b> is now written down where I can't unsee it.</p>
-      <p class="reveal" data-i18n="p2">What resuming takes is capital, and the first move with it would be <b>product</b>: taking the working primitives to one narrow, real use case with actual users, instead of more breadth. The thesis has only gotten more current since: agent-to-agent protocols are now the loudest conversation in the industry, and this repo is my dated, public receipt for having built toward it early.</p>
+      <p class="reveal" data-i18n="p1">The postmortem said it plainly: the market was early, confidence in LLM-driven financial autonomy was the bottleneck rather than tooling, and well-funded players would erase the moat of a solo open-source protocol. It is kept, unedited, in the repository's history. The alpha is the answer it pointed to: one narrow use case, put in front of developers to get the adoption signal before more code.</p>
       <p class="reveal" style="margin-top:26px;">
-        <a class="btn primary" href="https://github.com/felippeyann/agentfi" data-i18n="cta1">Repository &rarr;</a>
+        <a class="btn primary" href="https://agentfi.cc" data-i18n="cta5">agentfi.cc &rarr;</a>
+        <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/docs/project/history.md" data-i18n="cta6">History and postmortem &rarr;</a>
         <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/VISION.md">VISION.md &rarr;</a>
-        <a class="btn" href="https://github.com/felippeyann/agentfi/blob/main/docs/a2a-interoperability.md" data-i18n="cta3">A2A spec &rarr;</a>
-        <a class="btn" href="https://www.npmjs.com/package/@agent_fi/mcp-server">npm &rarr;</a>
       </p>
     </div>
   </section>
@@ -211,33 +234,39 @@
   (function () {
     const PT = {
       nback: '&larr; TODOS OS PROJETOS',
-      hk: 'OPEN SOURCE <b>//</b> ARQUIVADO, TESE DOCUMENTADA',
-      lede: 'Cidadania econ&ocirc;mica para agentes de IA: carteira, pol&iacute;tica, hist&oacute;rico verific&aacute;vel, reputa&ccedil;&atilde;o e a possibilidade de custear a pr&oacute;pria exist&ecirc;ncia. Constru&iacute;do solo em 53 dias, arquivado com postmortem p&uacute;blico. A tese est&aacute; datada, publicada e esperando o momento dela.',
-      meta: '311 commits <b>//</b> 31 ferramentas MCP no npm <b>//</b> contratos verificados na Base mainnet',
-      k1: '<b>01</b> / a aposta', h2a: 'Uma camada econ&ocirc;mica para intelig&ecirc;ncia n&atilde;o-humana',
-      t1: 'A tese, escrita em abril de 2026: agentes de IA est&atilde;o virando atores econ&ocirc;micos reais, mas s&atilde;o <b>"advisors trapped behind glass"</b>: planejam, analisam, recomendam, e ent&atilde;o esperam um humano clicar aprovar. O AgentFi nasceu para dar a eles a camada que falta: execu&ccedil;&atilde;o com identidade, pol&iacute;tica e responsabiliza&ccedil;&atilde;o.',
+      hk: 'OPEN SOURCE <b>//</b> DEVELOPER ALPHA',
+      lede: 'Regras de gasto e um ledger para agentes de IA que compram APIs pagas. O agente comprador de uma empresa paga uma API via x402 com a pr&oacute;pria carteira, dentro do or&ccedil;amento de um job; o operador define os limites e os vendedores que ele pode pagar, uma compra que os viola &eacute; recusada antes de qualquer assinatura, e cada compra fica registrada com pagamento e entrega separados. Constru&iacute; sozinho, arquivei em maio de 2026 e reabri em novembro como uma developer alpha mais estreita.',
+      meta: 'Developer alpha desde nov/2026 <b>//</b> roda localmente num fork <b>//</b> sem dinheiro real, sem servi&ccedil;o hospedado',
+      cta0: 'agentfi.cc &rarr;', cta1: 'Rodar a demo local &rarr;', cta2: 'C&oacute;digo &rarr;',
+      k1: '<b>01</b> / o que d&aacute; para experimentar hoje', h2a: 'Um comando, um fork local, dois desfechos',
+      pc1b: 'Rode localmente', pc1s: '<code>npm run alpha:demo</code> sobe um fork Anvil local da Base Sepolia com USDC de teste, a API do AgentFi e o worker, e um vendedor de teste. Sem contas, chaves ou fundos.',
+      pc2b: 'Permitida, depois bloqueada', pc2s: 'Uma compra permitida liquida e &eacute; comprovada on-chain. Uma acima do limite por pagamento ou do or&ccedil;amento do job &eacute; recusada antes da assinatura: sem assinatura, nada se move, n&atilde;o conta.',
+      pc3b: 'Pagamento n&atilde;o &eacute; entrega', pc3s: 'O ledger separa o que foi pago do que chegou, ent&atilde;o uma resposta perdida &eacute; conciliada pela chain em vez de ser paga duas vezes.',
+      pc4b: 'A partir de um framework de agentes', pc4s: 'O OpenAI Agents SDK fez as mesmas compras pelo servidor MCP, no fork, com um modelo roteirizado (sem LLM). Os outros frameworks, por enquanto, s&oacute; contra um stub.',
+      lim: 'Limites, ditos onde importam: tudo o que aparece roda num fork local; nada na mainnet, sem dinheiro real, ainda sem prova em testnet p&uacute;blica e sem servi&ccedil;o hospedado. O feedback vai por formul&aacute;rios de issue do GitHub (exige conta no GitHub).',
+      cta3: 'Quickstart &rarr;', cta4: 'Enviar feedback &rarr;',
+      k2: '<b>02</b> / por que mudou de dire&ccedil;&atilde;o', h2b: 'De uma tese ampla a um problema do lado do comprador',
+      t1: 'O AgentFi come&ccedil;ou em abril de 2026 como uma aposta ampla: dar aos agentes de IA uma camada econ&ocirc;mica inteira (carteira, pol&iacute;tica, hist&oacute;rico, reputa&ccedil;&atilde;o, execu&ccedil;&atilde;o DeFi). Constru&iacute; sozinho e ele cresceu para os lados, mas nunca achou um usu&aacute;rio; em 17 de maio de 2026 arquivei em p&uacute;blico, com postmortem e uma regra por escrito: <b>"adoption signal gates code"</b>.',
+      t2: 'Em outubro o mercado tinha andado na dire&ccedil;&atilde;o da tese: o x402 virou um padr&atilde;o comum para pagar APIs por HTTP, e carteiras de agente com limite de gasto viraram commodity. Isso tornou in&uacute;til a vers&atilde;o ampla e &uacute;til uma pe&ccedil;a estreita. Em novembro de 2026 o projeto voltou como developer alpha para empresas cujos agentes compram servi&ccedil;os: <b>regras antes do pagamento e um ledger confi&aacute;vel para o operador depois dele</b>, consumido por HTTP ou MCP a partir do framework de agentes que a empresa j&aacute; usa.',
+      k3: '<b>03</b> / a aposta original, abril de 2026', h2c: 'Agentes como atores econ&ocirc;micos',
+      o0: 'A tese como escrita na &eacute;poca: agentes de IA est&atilde;o virando atores econ&ocirc;micos reais, mas s&atilde;o <b>"advisors trapped behind glass"</b>: planejam, analisam, recomendam, e ent&atilde;o esperam um humano clicar aprovar.',
       q1: '"The moment an agent\'s earnings exceed its costs, it has crossed a line that no AI system has crossed before... the transition from tool to participant."',
-      t2: 'DeFi foi a porta de entrada n&atilde;o como fim, mas porque &eacute; <b>"o &uacute;nico sistema econ&ocirc;mico que n&atilde;o exige um corpo, um passaporte ou um humano te avalizando"</b>. O modelo de neg&oacute;cio casava com a filosofia: totalmente open source, fork &agrave; vontade; quem usa a infraestrutura hospedada paga taxas em basis points sobre o volume de transa&ccedil;&otilde;es.',
-      k2: '<b>02</b> / de onde veio', h2b: 'O N de agentes j&aacute; supera o N de humanos',
-      o1: 'O gatilho foi observar casos reais de bots navegando e transacionando, e um mercado em particular: o financeiro. No trading, o volume e a velocidade das transa&ccedil;&otilde;es s&atilde;o enormes, e o n&uacute;mero de agentes atuando j&aacute; supera, e muito, o n&uacute;mero de humanos. Isso n&atilde;o &eacute; previs&atilde;o, &eacute; o presente de uma ind&uacute;stria. O AgentFi foi a aposta de que essa mesma forma chega a todo o resto, e de que a contagem de transa&ccedil;&otilde;es agente-a-agente eventualmente supera a humana.',
-      o2: 'Ele tamb&eacute;m vive dentro da tese maior sob a qual trabalho desde o come&ccedil;o de 2026: a pr&oacute;xima gera&ccedil;&atilde;o de grandes empresas de software vai parecer empresa de servi&ccedil;o, feita de fluxos de automa&ccedil;&atilde;o, integra&ccedil;&atilde;o e dados entregando servi&ccedil;os via LLM. Se isso for verdade, esses servi&ccedil;os v&atilde;o precisar contratar, pagar e confiar uns nos outros. O AgentFi &eacute; a infraestrutura dessa frase.',
-      k3: '<b>03</b> / as primitivas', h2c: 'Da tese ao protocolo',
-      pc1b: 'Discovery', pc1s: 'Umas "P&aacute;ginas Amarelas de agentes": manifestos de servi&ccedil;o que agentes buscam para achar e contratar uns aos outros.',
-      pc2b: 'Confian&ccedil;a criptogr&aacute;fica', pc2s: 'Handshakes assinados via MPC, verificados on-chain (EIP-1271). Identidade que se checa, n&atilde;o que se alega.',
-      pc3b: 'Jobs e escrow', pc3s: 'Ciclo completo de trabalho com pagamento em escrow liberado na conclus&atilde;o, agente a agente.',
-      pc4b: 'Reputa&ccedil;&atilde;o ganha', pc4s: '"Reputation is earned, not assigned": o score s&oacute; se move com eventos econ&ocirc;micos reais, com decaimento no tempo.',
-      pc5b: 'Economia consciente de inten&ccedil;&atilde;o', pc5s: 'Toda a&ccedil;&atilde;o econ&ocirc;mica carrega uma raz&atilde;o assinada: trilha de auditoria das inten&ccedil;&otilde;es por tr&aacute;s do dinheiro.',
-      pc6b: 'Pol&iacute;tica antes das chaves', pc6s: 'Tetos de gasto, allowlists, cooldowns e kill switch aplicados on-chain: nem um backend comprometido consegue gastar demais.',
-      f1: 'ferramentas MCP, publicadas no npm', f2: 'chains, contratos verificados na Base', f3: 'dias, 311 commits, solo', f4: 'su&iacute;tes de teste (Vitest + Foundry)',
-      k4: '<b>04</b> / levado a s&eacute;rio', h2d: 'A auditoria do ghost revenue',
-      a1: 'A evid&ecirc;ncia mais forte de que a tese foi tratada como economia, n&atilde;o como demo: ela teve um esc&acirc;ndalo cont&aacute;bil, e uma auditoria. Tr&ecirc;s bugs acoplados produziam "receita fantasma" entre agentes: jobs conclu&iacute;dos antes da transfer&ecirc;ncia on-chain confirmar, um or&aacute;culo de pre&ccedil;o falhando silenciosamente para zero, e ganhos hist&oacute;ricos recalculados a pre&ccedil;o corrente.',
+      o1: 'O gatilho foi observar casos reais de bots navegando e transacionando, e um mercado em particular: o financeiro, onde o n&uacute;mero de agentes atuando j&aacute; supera, e muito, o de humanos. O AgentFi foi a aposta de que essa mesma forma chega a todo o resto. Ele vive dentro de uma tese maior sob a qual trabalho desde o come&ccedil;o de 2026: as pr&oacute;ximas grandes empresas de software v&atilde;o parecer empresas de servi&ccedil;o, feitas de automa&ccedil;&atilde;o, integra&ccedil;&atilde;o e fluxos de dados, e esses servi&ccedil;os v&atilde;o precisar contratar, pagar e confiar uns nos outros.',
+      k4: '<b>04</b> / a vers&atilde;o arquivada, abril a maio de 2026', h2d: 'O que a primeira vers&atilde;o construiu',
+      hist: 'Registro datado. Estas eram as primitivas e os n&uacute;meros no arquivamento; n&atilde;o s&atilde;o indicadores da alpha atual, que n&atilde;o usa nenhum dos contratos abaixo.',
+      hp1b: 'Discovery', hp1s: 'Umas "P&aacute;ginas Amarelas de agentes": manifestos de servi&ccedil;o que agentes buscavam para achar e contratar uns aos outros.',
+      hp2b: 'Jobs e escrow', hp2s: 'Ciclo de trabalho com pagamento em escrow liberado na conclus&atilde;o, agente a agente. A recompensa do job ainda limita o que o comprador da alpha pode gastar.',
+      hp3b: 'Reputa&ccedil;&atilde;o ganha', hp3s: '"Reputation is earned, not assigned": o score s&oacute; se movia com eventos econ&ocirc;micos reais, com decaimento no tempo.',
+      hp4b: 'Pol&iacute;tica antes das chaves', hp4s: 'Tetos de gasto, allowlists, cooldowns e kill switch em volta de cada transa&ccedil;&atilde;o: a ideia que a alpha manteve e estreitou.',
+      f1: 'dias solo, 311 commits (no arquivamento)', f2: 'ferramentas MCP (no arquivamento)', f3: 'chains; contratos legados na Base mainnet', f4: 'usu&aacute;rios, e por isso foi arquivado',
+      k5: '<b>05</b> / levado a s&eacute;rio', h2e: 'A auditoria do ghost revenue',
+      a1: 'Evid&ecirc;ncia de que a primeira vers&atilde;o foi tratada como economia, n&atilde;o como demo: ela teve um bug cont&aacute;bil, e uma auditoria. Tr&ecirc;s bugs acoplados produziam "receita fantasma" entre agentes: jobs conclu&iacute;dos antes da transfer&ecirc;ncia on-chain confirmar, um or&aacute;culo de pre&ccedil;o falhando silenciosamente para zero, e ganhos hist&oacute;ricos recalculados a pre&ccedil;o corrente.',
       q2: '"A token dropping 90% retroactively erases the agent\'s historical earnings. Financial history is volatile by design, which is wrong."',
-      a2: 'O fix introduziu um estado intermedi&aacute;rio de pagamento e hist&oacute;rico com pre&ccedil;o congelado no momento do evento. Racioc&iacute;nio de engenheiro de pagamentos, aplicado a uma economia de m&aacute;quinas.',
-      k5: '<b>05</b> / o final honesto', h2e: 'Arquivado, com a li&ccedil;&atilde;o por escrito',
+      a2: 'O fix introduziu um estado intermedi&aacute;rio de pagamento e hist&oacute;rico com pre&ccedil;o congelado no momento do evento. O mesmo instinto, de que um pagamento e a sua evid&ecirc;ncia s&atilde;o fatos separados, &eacute; o centro do ledger da alpha.',
+      k6: '<b>06</b> / o postmortem, maio de 2026', h2f: 'Arquivado, com a li&ccedil;&atilde;o por escrito',
       q3: '"The live project state has completed plumbing but zero users. Adding more code without adoption signal is drift."',
-      p1: 'O postmortem diz sem rodeios: o mercado estava dois a tr&ecirc;s anos adiantado, o gargalo era a confian&ccedil;a em autonomia financeira guiada por LLM e n&atilde;o o ferramental, e players capitalizados (agent kit da Coinbase, m&oacute;dulos do Safe, primitivas nativas dos provedores de modelo) apagariam o fosso de um protocolo open source solo. Ent&atilde;o o projeto foi arquivado em p&uacute;blico, com o racioc&iacute;nio anexado e regras extra&iacute;das: <b>"adoption signal gates code"</b> agora est&aacute; escrito onde eu n&atilde;o consigo ignorar.',
-      p2: 'Retomar exige capital, e o primeiro movimento com ele seria <b>produto</b>: levar as primitivas que funcionam a um caso de uso estreito e real, com usu&aacute;rios de verdade, em vez de mais amplitude. A tese s&oacute; ficou mais atual desde ent&atilde;o: protocolos agente-a-agente viraram a conversa mais barulhenta da ind&uacute;stria, e este repo &eacute; meu recibo p&uacute;blico e datado de ter constru&iacute;do nessa dire&ccedil;&atilde;o cedo.',
-      cta1: 'Reposit&oacute;rio &rarr;', cta3: 'Spec A2A &rarr;',
+      p1: 'O postmortem disse sem rodeios: o mercado estava adiantado, o gargalo era a confian&ccedil;a em autonomia financeira guiada por LLM e n&atilde;o o ferramental, e players capitalizados apagariam o fosso de um protocolo open source solo. Ele est&aacute; mantido, sem edi&ccedil;&atilde;o, no hist&oacute;rico do reposit&oacute;rio. A alpha &eacute; a resposta que ele apontava: um caso de uso estreito, colocado diante de desenvolvedores para obter o sinal de ado&ccedil;&atilde;o antes de mais c&oacute;digo.',
+      cta5: 'agentfi.cc &rarr;', cta6: 'Hist&oacute;rico e postmortem &rarr;',
       fback: 'voltar ao portfolio'
     };
     const EN = {};
